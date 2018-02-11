@@ -1,3 +1,17 @@
-# README
+# Work in Progress #
+## ProERP ##
 
-test.
+Spring Boot full stack web application for procurement procedure.
+
+Technologies:
+
+* Spring 
+  * Boot
+  * MVC
+  * Data JPA
+* ThymeLeaf
+* Hibernate
+* Bootstrap 4
+* Oracle RDBMS
+* PL/SQL
+
