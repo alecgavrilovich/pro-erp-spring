@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{home :: header}"></head>
+<body>
+	<div th:replace="~{home :: nav}"></div>
+	<div class="container">
+		<div>
+			<h2>Departments</h2>
+			<table class="table table-striped">
+				<tr>
+					<th>Id</th>
+					<th>Name</th>
+					<th>Employees</th>
+				</tr>
+				<tr th:each="department : ${departments}">
+					<td th:text="${department.id}"></td>
+					<td th:text="${department.name}"></td>
+					<td th:text="${department.employee_count}"></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div th:replace="~{home :: scripts}"></div>
+	<footer th:replace="~{home :: footer}"></footer>
+</body>
+</html>

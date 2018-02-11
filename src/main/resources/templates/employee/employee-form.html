@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{home :: header}"></head>
+<body>
+	<div th:insert="~{home :: nav}"></div>
+
+	<div class="container">
+		<h2>Employee Details</h2>
+		<form th:object="${employeeForm}" th:action="@{/employee/}"
+			method="post">
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label class="">First Name</label> <input type="text"
+						class="form-control" th:field="*{first_name}" />
+				</div>
+				<div class="form-group col-md-6">
+					<label class="">Last Name</label> <input type="text"
+						class="form-control" th:field="*{last_name}" />
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-4">
+					<label class="">Id</label> <input type="number"
+						class="form-control" th:field="*{id}" />
+				</div>
+				<div class="form-group col-md-5">
+					<label class="">UPRN</label> <input type="number"
+						class="form-control" th:field="*{uprn}" />
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-4">
+					<label class="">Department</label> <input type="number"
+						class="form-control" th:field="*{department_id}" />
+				</div>
+				<div class="form-group col-md-4">
+					<label class="">Position</label> <input type="text"
+						class="form-control" th:field="*{position}" />
+				</div>
+				<div class="form-group col-md-4">
+					<label class="">Salary</label> <input type="number"
+						class="form-control" th:field="*{salary}" />
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="">
+					<button type="submit" class="btn btn-success">Save</button>
+					<a th:href="@{/employee/list}" class="btn btn-danger">Cancel</a>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div th:replace="~{home :: scripts}"></div>
+	<footer th:replace="~{home :: footer}"></footer>
+</body>
+</html>

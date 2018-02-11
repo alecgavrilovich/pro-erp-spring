@@ -1,0 +1,49 @@
+html, body {
+	height: 100vh;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+}
+
+#main-footer {
+ 	padding: 1rem;
+  	background-color: #efefef;
+  	text-align: center;
+}
+
+table {
+    counter-reset: rowNumber;
+}
+
+table tr > td:first-child {
+    counter-increment: rowNumber;
+}
+
+table tr td:first-child::before {
+    content: counter(rowNumber);
+    width: 30px;
+    margin-right: 0.5em;
+    padding-right: 0.5em;
+}
+
+table tr th:first-child::before {
+	content:"n.";
+	min-width: 1em;
+    margin-right: 0.3em;
+    padding-right: 0.3em;
+}
+
+.container {
+	 flex: 1;
+	 margin-bottom: 50px;
+}
+
+.clickable-row {
+	cursor: pointer;
+}
+
+.btn, .form-control {
+	border-radius: 0;
+}
