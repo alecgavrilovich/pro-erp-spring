@@ -22,7 +22,7 @@ public class DepartmentController {
         return "redirect:department/list";
     }
 
-    @RequestMapping({"/show", "/departments"})
+    @RequestMapping({"/list", "/departments"})
     public String listDepartments(Model model){
         model.addAttribute("departments", departmentService.listAll());
         return "departments";

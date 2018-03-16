@@ -19,6 +19,7 @@ public class EmployeeToEmployeeForm implements Converter<Employee, EmployeeForm>
 		employeeForm.setDepartment_id(employee.getDepartment_id());
 		employeeForm.setPosition(employee.getPosition());
 		employeeForm.setSalary(employee.getSalary());
+		employeeForm.setStatus(1);
 		return employeeForm;
 	}
 }

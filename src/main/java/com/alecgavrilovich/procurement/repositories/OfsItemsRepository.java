@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.alecgavrilovich.procurement.domain.OfsItem;
+import com.alecgavrilovich.procurement.domain.OFSItem;
 
-public interface OfsItemsRepository extends CrudRepository<OfsItem, Integer> {
+public interface OfsItemsRepository extends CrudRepository<OFSItem, Integer> {
 
-	public List<OfsItem> findByOfsId(Integer id);
+	public List<OFSItem> findByOfsId(Integer id);
 }

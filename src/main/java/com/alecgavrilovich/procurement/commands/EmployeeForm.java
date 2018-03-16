@@ -10,6 +10,7 @@ public class EmployeeForm {
 		private String first_name;
 		private String last_name;
 		private int salary;
+		private int status = 0;
 		
 		
 		public Integer getId() {
@@ -54,4 +55,12 @@ public class EmployeeForm {
 		public void setSalary(int salary) {
 			this.salary = salary;
 		}
+		public int getStatus() {
+			return status;
+		}
+		public void setStatus(int status) {
+			this.status = status;
+		}
+		
+		
 }

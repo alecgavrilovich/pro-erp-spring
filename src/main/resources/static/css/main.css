@@ -29,7 +29,7 @@ table tr td:first-child::before {
 }
 
 table tr th:first-child::before {
-	content:"n.";
+	content:"#";
 	min-width: 1em;
     margin-right: 0.3em;
     padding-right: 0.3em;

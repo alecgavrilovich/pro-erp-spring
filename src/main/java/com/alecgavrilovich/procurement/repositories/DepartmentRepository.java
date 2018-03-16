@@ -1,8 +1,11 @@
 package com.alecgavrilovich.procurement.repositories;
 
-import org.springframework.data.repository.CrudRepository;
+
+import java.util.List;
 import com.alecgavrilovich.procurement.domain.Department;
 
-public interface DepartmentRepository extends CrudRepository<Department, Integer> {
+public interface DepartmentRepository {
+	
+	public List<Department> findAll();
 	
 }

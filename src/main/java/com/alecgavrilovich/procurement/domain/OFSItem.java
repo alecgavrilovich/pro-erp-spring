@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="OFS_ITEM")
-public class OfsItem {
+public class OFSItem {
 	
 	@Id
 	private Integer id;

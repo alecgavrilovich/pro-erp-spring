@@ -6,7 +6,7 @@
 	<div class="container">
 		<div>
 			<h2>Employees</h2>
-			<a class="btn btn-success mb-2" href="/employee/new" role="button">New</a>
+			<a class="btn btn-success mb-2" href="/employees/new" role="button">New</a>
 			<table class="table table-striped">
 				<tr>
 					<th>ID</th>
@@ -16,13 +16,13 @@
 					<th>EDIT</th>
 					<th>DELETE</th>
 				</tr>
-				<tr th:each="employee : ${employees}" class="clickable-row" role="button" th:data-href="${'/employee/show/' + employee.id}">
+				<tr th:each="employee, empStat : ${employees}" class="clickable-row" role="button" th:data-href="${'/employees/show/' + employee.id}">
 					<td th:text="${employee.id}"></td>
 					<td th:text="${employee.first_name}"></td>
 					<td th:text="${employee.last_name}"></td>
 					<td th:text="${employee.department_id}"></td>
-					<td><a th:href="${'/employee/edit/' + employee.id}">Edit</a></td>
-					<td><a th:href="${'/employee/delete/' + employee.id}">Delete</a></td>
+					<td><a th:href="${'/employees/edit/' + employee.id}">Edit</a></td>
+					<td><a th:href="${'/employees/delete/' + employee.id}">Delete</a></td>
 				</tr>
 			</table>
 		</div>

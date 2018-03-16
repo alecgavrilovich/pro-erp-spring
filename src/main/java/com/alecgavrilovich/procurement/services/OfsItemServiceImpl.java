@@ -1,40 +1,34 @@
 package com.alecgavrilovich.procurement.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.alecgavrilovich.procurement.commands.OfsItemForm;
-import com.alecgavrilovich.procurement.domain.OfsItem;
-import com.alecgavrilovich.procurement.repositories.OfsItemsRepository;
+import com.alecgavrilovich.procurement.commands.OFSItemForm;
+import com.alecgavrilovich.procurement.dao.OFSItemsDao;
+import com.alecgavrilovich.procurement.domain.OFSItem;
 
 @Service
 public class OfsItemServiceImpl implements OfsItemService {
 	
-	private OfsItemsRepository ofsItemRepository;
-
 	@Autowired
-	public OfsItemServiceImpl(OfsItemsRepository ofsItemRepository) {
-		this.ofsItemRepository= ofsItemRepository;
-	}
-	
+	private OFSItemsDao ofsItemsDao;
 	
 	@Override
-	public List<OfsItem> listAll() {
+	public List<OFSItem> listAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public OfsItem getById(Integer id) {
+	public OFSItem getById(Integer id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public OfsItem saveOrUpdate(OfsItem targetObject) {
+	public OFSItem saveOrUpdate(OFSItem targetObject) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -46,16 +40,16 @@ public class OfsItemServiceImpl implements OfsItemService {
 	}
 
 	@Override
-	public OfsItem saveOrUpdateObjectForm(OfsItemForm targetObjectForm) {
+	public OFSItem saveOrUpdateObjectForm(OFSItemForm targetObjectForm) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<OfsItem> getItemsByOfsId(Integer id) {
-		List<OfsItem> items = new ArrayList<>();
-		ofsItemRepository.findByOfsId(id).forEach(items::add);
-		return items;
+	public List<OFSItem> getItemsByOfsId(Integer id) {
+//		List<OFSItem> items = new ArrayList<>();
+//		ofsItemRepository.findByOfsId(id).forEach(items::add);	
+		return ofsItemsDao.findByOFSId(id);
 	}
 
 }

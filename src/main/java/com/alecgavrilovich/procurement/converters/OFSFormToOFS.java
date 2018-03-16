@@ -3,16 +3,16 @@ package com.alecgavrilovich.procurement.converters;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
-import com.alecgavrilovich.procurement.commands.OfsForm;
-import com.alecgavrilovich.procurement.domain.OrderForSupplies;
+import com.alecgavrilovich.procurement.commands.OFSForm;
+import com.alecgavrilovich.procurement.domain.OFS;
 
 
 @Component
-public class OfsFormToOfs implements Converter<OfsForm, OrderForSupplies> {
+public class OFSFormToOFS implements Converter<OFSForm, OFS> {
 	
 	@Override
-	public OrderForSupplies convert(OfsForm ofsForm) {
-		OrderForSupplies ofs = new OrderForSupplies();
+	public OFS convert(OFSForm ofsForm) {
+		OFS ofs = new OFS();
 		ofs.setId(ofsForm.getId());
 		ofs.setOrderDate(ofsForm.getOrderDate());
 		ofs.setEmployeeId(ofsForm.getEmployeeId());

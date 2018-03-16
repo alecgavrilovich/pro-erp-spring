@@ -13,11 +13,10 @@ import com.alecgavrilovich.procurement.services.OfsService;
 
 @Controller
 @RequestMapping("/ofs")
-public class OfsController {
+public class OFSController {
 	
 	private OfsService ofsService;
 	private OfsItemServiceImpl ofsItemServiceImpl;
-//	private OfsToOfsForm ofsToOfsForm;
 	
 	@Autowired
 	public void setOfsService(OfsService ofsService) {
@@ -29,10 +28,6 @@ public class OfsController {
 		this.ofsItemServiceImpl = ofsItemService;
 	}
 	
-//	@Autowired
-//	public void setToOfsForm(OfsToOfsForm ofsToOfsForm) {
-//		this.ofsToOfsForm = ofsToOfsForm;
-//	}
 	
 	@RequestMapping("")
 	public String redirToList() {
