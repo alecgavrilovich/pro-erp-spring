@@ -34,7 +34,7 @@ public class OFSItemsDaoImpl implements OFSItemsDao {
 				ofsItem.setDeliveryTime(rs.getDate("delivery_time"));
 				ofsItemsList.add(ofsItem);
 			}
-			
+			connection.close();
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -44,7 +44,23 @@ public class OFSItemsDaoImpl implements OFSItemsDao {
 
 	@Override
 	public void save(OFSItem ofsItem) {
-		// TODO Auto-generated method stub
+		try {
+			Connection connection = DBUtil.getDataSource().getConnection();
+			PreparedStatement ps = connection.prepareStatement("INSERT INTO OFS_ITEM VALUES(?, ?, ?, ?, ?, ?, ?)");
+
+			ps.setInt(1, ofsItem.getOfsId());
+			ps.setInt(2, ofsItem.getId());
+			ps.setString(3, ofsItem.getProductName());
+			ps.setInt(4, ofsItem.getProductId());
+			ps.setInt(5, ofsItem.getQuantity());
+			ps.setDate(6, ofsItem.getOrderDate());
+			ps.setDate(7, ofsItem.getDeliveryTime());
+
+			ps.executeQuery();
+			connection.close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 
 	}
 
@@ -56,7 +72,17 @@ public class OFSItemsDaoImpl implements OFSItemsDao {
 
 	@Override
 	public void delete(Integer id) {
-		// TODO Auto-generated method stub
+		try {
+			Connection connection = DBUtil.getDataSource().getConnection();
+			PreparedStatement ps = connection.prepareStatement("DELETE FROM OFS_ITEM WHERE ID =?");
+
+			ps.setInt(1, id);
+
+			ps.executeQuery();
+			connection.close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 
 	}
 

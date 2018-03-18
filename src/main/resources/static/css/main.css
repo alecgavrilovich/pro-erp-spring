@@ -13,6 +13,7 @@ body {
   	text-align: center;
 }
 
+/*
 table {
     counter-reset: rowNumber;
 }
@@ -34,8 +35,9 @@ table tr th:first-child::before {
     margin-right: 0.3em;
     padding-right: 0.3em;
 }
+*/
 
-.container {
+.container, .container-fluid {
 	 flex: 1;
 	 margin-bottom: 50px;
 }
@@ -47,3 +49,11 @@ table tr th:first-child::before {
 .btn, .form-control {
 	border-radius: 0;
 }
+
+
+#table-edit-ofs  td,
+#table-edit-ofs  th {
+	max-width: 70px;
+	padding: 0;
+}
+

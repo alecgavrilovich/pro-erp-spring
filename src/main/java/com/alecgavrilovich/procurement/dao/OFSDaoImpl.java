@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.alecgavrilovich.procurement.commands.OFSForm;
 import com.alecgavrilovich.procurement.domain.OFS;
 
 @Component
@@ -30,7 +31,7 @@ public class OFSDaoImpl implements OFSDao {
 				ofs.setEmployeeId(rs.getInt("EMPLOYEE_ID"));
 				ofsList.add(ofs);
 			}
-			
+			connection.close();
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -53,7 +54,7 @@ public class OFSDaoImpl implements OFSDao {
 				ofs.setOrderDate(rs.getDate("order_date"));
 				ofs.setEmployeeId(rs.getInt("employee_id"));
 			}
-
+			connection.close();
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -62,20 +63,55 @@ public class OFSDaoImpl implements OFSDao {
 	}
 
 	@Override
-	public void save(OFS ofs) {
-		// TODO Auto-generated method stub
+	public void save(OFSForm ofs) {
+		try {
+			Connection connection = DBUtil.getDataSource().getConnection();
+			PreparedStatement ps = connection.prepareStatement("INSERT INTO ORDER_FOR_SUPPLIES VALUES(?, ?, ?)");
+
+			ps.setInt(1, ofs.getId());
+			ps.setDate(2, ofs.getOrderDate());
+			ps.setInt(3, ofs.getEmployeeId());
+
+			ps.executeQuery();
+			connection.close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 
 	}
 
 	@Override
 	public void update(OFS ofs) {
-		// TODO Auto-generated method stub
+		
+		try {
+			Connection connection = DBUtil.getDataSource().getConnection();
+			PreparedStatement ps = connection.prepareStatement("UPDATE ORDER_FOR_SUPPLIES SET order_date=?, employee_id=? WHERE id=?");
+
+			ps.setDate(1, ofs.getOrderDate());
+			ps.setInt(2, ofs.getEmployeeId());
+			ps.setInt(3, ofs.getId());
+
+			ps.executeQuery();
+			connection.close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 
 	}
 
 	@Override
 	public void delete(Integer id) {
-		// TODO Auto-generated method stub
+		try {
+			Connection connection = DBUtil.getDataSource().getConnection();
+			PreparedStatement ps = connection.prepareStatement("DELETE FROM ORDER_FOR_SUPPLIES WHERE ID =?");
+
+			ps.setInt(1, id);
+
+			ps.executeQuery();
+			// connection.close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}	
 
 	}
 

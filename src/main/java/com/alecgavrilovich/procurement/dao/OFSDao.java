@@ -2,6 +2,7 @@ package com.alecgavrilovich.procurement.dao;
 
 import java.util.List;
 
+import com.alecgavrilovich.procurement.commands.OFSForm;
 import com.alecgavrilovich.procurement.domain.OFS;
 
 public interface OFSDao {
@@ -10,7 +11,7 @@ public interface OFSDao {
 	
 	OFS findOne(Integer id);
 	
-	void save(OFS ofs);
+	void save(OFSForm ofs);
 	
 	void update(OFS ofs);
 	

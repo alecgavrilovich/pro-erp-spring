@@ -4,22 +4,20 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.alecgavrilovich.procurement.domain.OFSItem;
-
 public class OFSForm {
 
 	private Integer id;
 	private Date orderDate;
 	private Integer employeeId;
+	private List<OFSItemForm> ofsItemsForms = new ArrayList<>();
 	
-	private List<OFSItem> ofsItems = new ArrayList<>();
-	
-	public List<OFSItem> getOfsItems() {
-		return ofsItems;
+
+	public List<OFSItemForm> getOfsItemsForms() {
+		return ofsItemsForms;
 	}
 	
-	public void setOfsItems(List<OFSItem> ofsItems) {
-		this.ofsItems = ofsItems;
+	public void setOfsItemsForms(List<OFSItemForm> ofsItemsForms) {
+		this.ofsItemsForms = ofsItemsForms;
 	}
 	
 	public Integer getId() {

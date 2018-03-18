@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{home :: header}"></head>
+<body>
+	<div th:insert="~{home :: nav}"></div>
+	<div class="container">
+		<div>
+			<h2>Suppliers</h2>
+			<a class="btn btn-success mb-2" href="/suppliers/new" role="button">New</a>
+			<table class="table table-striped">
+				<tr>
+					<th>ID</th>
+					<th>NAME</th>
+					<th>ADDRESS</th>
+					<th>TELEPHONE</th>
+					<th>EDIT</th>
+					<th>REMOVE</th>
+				</tr>
+				<tr th:each="supplier : ${suppliers}" class="clickable-row" role="button" th:data-href="${'/suppliers/show/' + supplier.id}">
+					<td th:text="${supplier.id}"></td>
+					<td th:text="${supplier.name}"></td>
+					<td th:text="${supplier.address}"></td>
+					<td th:text="${supplier.telephone}"></td>
+					<td><a th:href="${'/suppliers/edit/' + supplier.id}">Edit</a></td>
+					<td><a th:href="${'/suppliers/delete/' + supplier.id}">Delete</a></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div th:replace="~{home :: scripts}"></div>
+	<footer th:replace="~{home :: footer}"></footer>
+</body>
+</html>
