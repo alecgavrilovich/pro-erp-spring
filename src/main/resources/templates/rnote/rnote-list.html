@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{home :: header}"></head>
+<body>
+	<div th:insert="~{home :: nav}"></div>
+	<div class="container">
+		<div>
+			<h2>Prijemnica</h2>
+			<a class="btn btn-success mb-2" th:href="${'/rnote/new'}" role="button">New</a>
+			<table class="table table-striped">
+				<tr>
+					<th>ID</th>
+					<th>DATE RECEIVED</th>
+					<th>EMPLOYEE ID</th>
+					<th>SUPPLIER ID</th>
+					<th>DNOTE_ID</th>
+					<th>DNOTE_ITEM_ID</th>
+					<th>NUM PACKAGES</th>
+					<th>INSPECTOR</th>
+					<th>EDIT</th>
+					<th>DELETE</th>
+				</tr>
+				<tr th:each="rnote : ${rNoteList}" class="clickable-row" th:data-href="${'/rnote/show/' + rnote.id}">
+					<td th:text="${rnote.id}"></td>
+					<td th:text="${rnote.dateReceived}"></td>
+					<td th:text="${rnote.employeeId}"></td>
+					<td th:text="${rnote.supplierId}"></td>
+					<td th:text="${rnote.dnoteId}"></td>
+					<td th:text="${rnote.dnoteItemId}"></td>
+					<td th:text="${rnote.numPackages}"></td>
+					<td th:text="${rnote.inspector}"></td>
+					<td><a th:href="${'/rnote/edit/' + rnote.id}">Edit</a></td>
+					<td><a th:href="${'/rnote/delete/' + rnote.id}">Delete</a></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<footer th:replace="~{home :: scripts}"></footer>
+	<footer th:replace="~{home :: footer}"></footer>
+</body>
+</html>

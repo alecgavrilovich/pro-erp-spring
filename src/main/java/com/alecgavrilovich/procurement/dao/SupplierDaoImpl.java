@@ -32,7 +32,7 @@ public class SupplierDaoImpl implements SupplierDao {
 			}
 			connection.close();
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.out.println(e);
 		}
 		
 		return suppliersList;
