@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{home :: header}"></head>
+<body>
+	<div th:insert="~{home :: nav}"></div>
+	<div class="container">
+		<a class="btn btn-primary mb-4" href="/rfo/list" role="button">Back</a>
+		<div class="row">
+			<div class="col-sm-6">
+				<h5>Request for offer</h5>
+				<h2 th:text="'No.' + ${rfo.id}"></h2>
+			</div>
+		</div>
+		<form>
+			<div class="form-group row">
+				<label for="ofs_date" class="col-sm-2 col-form-label">Date
+					created: </label>
+				<div class="col-sm-10">
+					<p class="form-control-plaintext" id="ofs_date"
+						th:text="${rfo.dateCreated}"></p>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="ofs_date" class="col-sm-2 col-form-label">OFS
+					ID: </label>
+				<div class="col-sm-10">
+					<p class="form-control-plaintext" id="ofs_date"
+						th:text="${rfo.ofsId}"></p>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="ofs_date" class="col-sm-2 col-form-label">Supplier
+					ID: </label>
+				<div class="col-sm-10">
+					<p class="form-control-plaintext" id="ofs_date"
+						th:text="${rfo.supplierId}"></p>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="ofs_date" class="col-sm-2 col-form-label">Supplier
+					Name: </label>
+				<div class="col-sm-10">
+					<p class="form-control-plaintext" id="ofs_date"
+						th:text="${rfo.supplierName}"></p>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="ofs_empid" class="col-sm-2 col-form-label">Approved
+					by Employee: </label>
+				<div class="col-sm-10">
+					<p class="form-control-plaintext" id="ofs_empid"
+						th:text="${rfo.employeeId}"></p>
+				</div>
+			</div>
+		</form>
+
+		<!--  <h3>Items</h3>
+		
+		<table class="table table-striped">
+				<tr>
+					<th>ID</th>
+					<th>OFS ID</th>
+					<th>PRODUCT NAME</th>
+					<th>PRODUCT ID</th>
+					<th>QUANTITY</th>
+					<th>ORDER DATE</th>
+					<th>DELIVERY TIME</th>
+				</tr>
+				<tr th:each="item : ${items}">
+					<td th:text="${item.id}"></td>
+					<td th:text="${item.ofsId}"></td>
+					<td th:text="${item.productName}"></td>
+					<td th:text="${item.productId}"></td>
+					<td th:text="${item.quantity}"></td>
+					<td th:text="${item.orderDate}"></td>
+					<td th:text="${item.deliveryTime}"></td>
+				</tr>
+			</table> -->
+	</div>
+	<div th:replace="~{home :: scripts}"></div>
+	<footer th:replace="~{home :: footer}"></footer>
+</body>
+</html>

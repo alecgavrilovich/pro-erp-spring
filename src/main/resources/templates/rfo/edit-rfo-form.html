@@ -5,21 +5,34 @@
 	<div th:insert="~{home :: nav}"></div>
 	<div class="container-fluid">
 		<h2>New OFS</h2>
-		<form id="ofsForm" th:object="${ofsForm}" th:action="@{/ofs/new}"
+		<form id="rfoForm" th:object="${rfoForm}" th:action="@{/rfo/edit/} + ${rfoForm.id}"
 			method="post">
 			<div class="form-group col-md-6">
-				<label class="">OFS Id</label> <input type="text"
+				<label class="">RFO Id</label> <input type="text"
 					class="form-control" th:field="*{id}" />
 			</div>
 			<div class="form-group col-md-6">
-				<label class="">Order Date</label> <input type="text"
-					class="form-control" th:field="*{orderDate}" />
+				<label class="">Date</label> <input type="text"
+					class="form-control" th:field="*{dateCreated}" />
+			</div>
+			<div class="form-group col-md-6">
+				<label class="">OFS Id</label> <input type="text"
+					class="form-control" th:field="*{ofsId}" />
+			</div>
+			<div class="form-group col-md-6">
+				<label class="">Supplier Id</label> <input type="text"
+					class="form-control" th:field="*{supplierId}" />
+			</div>
+			<div class="form-group col-md-6">
+				<label class="">Supplier Name</label> <input type="text"
+					class="form-control" th:field="*{supplierName}" />
 			</div>
 			<div class="form-group col-md-4">
 				<label class="">Employee Id</label> <input type="number"
 					class="form-control" th:field="*{employeeId}" />
 			</div>
 
+			<!-- 
 			<div class="form-group col-12">
 				<button type="submit" name="addItem" class="btn btn-default">Add
 					Item</button>
@@ -60,12 +73,12 @@
 						</tr>
 					</tbody>
 				</table>
-			</div>
+			</div>  -->
 
 			<div class="form-group">
 				<div class="">
-					<button type="submit" name="save" class="btn btn-success">Save</button>
-					<a th:href="@{/ofs/list}" class="btn btn-danger">Cancel</a>
+					<button type="submit" name="saveEdit" class="btn btn-success">Save</button>
+					<a th:href="@{/rfo/list}" class="btn btn-danger">Cancel</a>
 				</div>
 			</div>
 		</form>

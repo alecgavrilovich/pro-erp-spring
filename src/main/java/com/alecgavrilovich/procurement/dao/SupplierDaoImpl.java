@@ -30,6 +30,7 @@ public class SupplierDaoImpl implements SupplierDao {
 				supplier.setTelephone(rs.getInt("TELEPHONE"));
 				suppliersList.add(supplier);
 			}
+			connection.close();
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -53,6 +54,7 @@ public class SupplierDaoImpl implements SupplierDao {
 				supplier.setAddress(rs.getString("ADDRESS"));
 				supplier.setTelephone(rs.getInt("TELEPHONE"));
 			}
+			connection.close();
 		} catch (Exception e) {
 			System.out.println(e);
 		}

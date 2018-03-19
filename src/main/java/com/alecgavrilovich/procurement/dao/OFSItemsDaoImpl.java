@@ -66,7 +66,21 @@ public class OFSItemsDaoImpl implements OFSItemsDao {
 
 	@Override
 	public void update(OFSItem ofsItem) {
-		// TODO Auto-generated method stub
+		try {
+			Connection connection = DBUtil.getDataSource().getConnection();
+			PreparedStatement ps = connection.prepareStatement("UPDATE ofs_item SET product_name=?, product_id=?, quantity=?, delivery_time=? WHERE id=?");
+
+			ps.setString(1, ofsItem.getProductName());
+			ps.setInt(2, ofsItem.getProductId());
+			ps.setInt(3, ofsItem.getQuantity());
+			ps.setDate(4, ofsItem.getDeliveryTime());
+			ps.setInt(5, ofsItem.getId());
+
+			ps.executeQuery();
+			connection.close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 
 	}
 

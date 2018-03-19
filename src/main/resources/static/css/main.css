@@ -51,8 +51,8 @@ table tr th:first-child::before {
 }
 
 
-#table-edit-ofs  td,
-#table-edit-ofs  th {
+.table-ofs  td,
+.table-ofs  th {
 	max-width: 70px;
 	padding: 0;
 }

@@ -34,7 +34,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 				emp.setLast_name(rs.getString("LAST_NAME"));
 				employees.add(emp);
 			}
-			// connection.close();
+			connection.close();
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -59,8 +59,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 				emp.setLast_name(rs.getString("LAST_NAME"));
 				emp.setSalary(rs.getInt("SALARY"));
 			}
-
-			// st.close();
+			connection.close();
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -83,7 +82,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			ps.setInt(7, employee.getSalary());
 
 			ps.executeQuery();
-			// connection.close();
+			connection.close();
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -104,7 +103,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			ps.setInt(7, employee.getId());
 
 			ps.executeQuery();
-			// connection.close();
+			connection.close();
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -119,7 +118,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			ps.setInt(1, id);
 
 			ps.executeQuery();
-			// connection.close();
+			connection.close();
 		} catch (Exception e) {
 			System.out.println(e);
 		}	

@@ -77,7 +77,6 @@ public class OFSDaoImpl implements OFSDao {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-
 	}
 
 	@Override
@@ -108,7 +107,7 @@ public class OFSDaoImpl implements OFSDao {
 			ps.setInt(1, id);
 
 			ps.executeQuery();
-			// connection.close();
+			connection.close();
 		} catch (Exception e) {
 			System.out.println(e);
 		}	

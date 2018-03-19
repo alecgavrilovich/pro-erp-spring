@@ -4,8 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.alecgavrilovich.procurement.commands.OFSItemForm;
 import com.alecgavrilovich.procurement.dao.OFSItemsDao;
 import com.alecgavrilovich.procurement.domain.OFSItem;
 
