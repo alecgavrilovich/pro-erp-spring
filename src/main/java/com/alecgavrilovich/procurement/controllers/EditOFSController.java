@@ -49,10 +49,6 @@ public class EditOFSController {
 	@Autowired
 	private OFSItemFormToOFSItem ofsItemFormToOFSItem;
 
-	// private List<OFSItemForm> updatedOFSItems = new ArrayList<>();
-	// private List<OFSItemForm> newOfsItems = new ArrayList<>();
-	// private List<OFSItemForm> deletedOFSItems = new ArrayList<>();
-
 	@RequestMapping("/{id}")
 	public String edit(@PathVariable String id, Model model) {
 
@@ -78,21 +74,11 @@ public class EditOFSController {
 	public String saveEdit(@ModelAttribute("ofsForm") final OFSForm ofsForm, final BindingResult bindingResult) {
 
 		OFS ofs = ofsFormToOFS.convert(ofsForm);
+		
 		ofsDao.update(ofs);
-
-//		if (this.deletedOFSItems.size() > 0) {
-//			this.deletedOFSItems.forEach(item -> {
-//				OFSItem ofsItem = ofsItemFormToOFSItem.convert(item);
-//				ofsItemsDao.delete(ofsItem.getId());
-//			});
-//		}
-//
-//		ofsForm.getOfsItemsForms().forEach(item -> {
-//			OFSItem ofsItem = ofsItemFormToOFSItem.convert(item);
-//			ofsItemsRepository.save(ofsItem);
-//		});
 		
 		ofsForm.getOfsItemsForms().forEach(item -> {
+			
 			OFSItem ofsItem = ofsItemFormToOFSItem.convert(item);
 			switch (item.getStatus()) {
 			case 1:
@@ -130,11 +116,28 @@ public class EditOFSController {
 		Integer itemId = Integer.valueOf(req.getParameter("removeItemEdit"));
 		OFSItemForm ofsItemForm = ofsForm.getOfsItemsForms().get(itemId.intValue());
 
-		if (ofsItemForm.getStatus() == 1) {
+		switch (ofsItemForm.getStatus()) {
+		case 1:
 			ofsItemForm.setStatus(2);
-		} else if (ofsItemForm.getStatus() == 3) {
+			break;
+		case 3:
 			ofsItemForm.setStatus(4);
+			break;
+		case 2:
+			ofsItemForm.setStatus(1);
+			break;
+		case 4:
+			ofsItemForm.setStatus(3);
+			break;
+		default:
+			break;
 		}
+		
+//		if (ofsItemForm.getStatus() == 1) {
+//			ofsItemForm.setStatus(2);
+//		} else if (ofsItemForm.getStatus() == 3) {
+//			ofsItemForm.setStatus(4);
+//		}
 
 		return "ofs/edit-ofs-form";
 	}

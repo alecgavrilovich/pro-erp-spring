@@ -15,7 +15,7 @@
 					<th>SUPPLIER ID</th>
 					<th>DNOTE_ID</th>
 					<th>DNOTE_ITEM_ID</th>
-					<th>NUM PACKAGES</th>
+					<th>STATUS</th>
 					<th>INSPECTOR</th>
 					<th>EDIT</th>
 					<th>DELETE</th>
@@ -27,7 +27,7 @@
 					<td th:text="${rnote.supplierId}"></td>
 					<td th:text="${rnote.dnoteId}"></td>
 					<td th:text="${rnote.dnoteItemId}"></td>
-					<td th:text="${rnote.numPackages}"></td>
+					<td th:text="${rnote.status}"></td>
 					<td th:text="${rnote.inspector}"></td>
 					<td><a th:href="${'/rnote/edit/' + rnote.id}">Edit</a></td>
 					<td><a th:href="${'/rnote/delete/' + rnote.id}">Delete</a></td>

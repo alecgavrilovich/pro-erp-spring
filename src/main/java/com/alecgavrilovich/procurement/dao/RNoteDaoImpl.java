@@ -30,7 +30,7 @@ public class RNoteDaoImpl implements RNoteDao {
 				rNote.setSupplierId(rs.getInt("supplier_id"));
 				rNote.setDnoteId(rs.getInt("dnote_id"));
 				rNote.setDnoteItemId(rs.getInt("dnote_item_id"));
-				rNote.setNumPackages(rs.getInt("num_packages"));
+				rNote.setStatus(rs.getString("status"));
 				rNote.setInspector(rs.getInt("inspector"));
 				rNoteList.add(rNote);
 			}
@@ -59,7 +59,7 @@ public class RNoteDaoImpl implements RNoteDao {
 				rNote.setSupplierId(rs.getInt("supplier_id"));
 				rNote.setDnoteId(rs.getInt("dnote_id"));
 				rNote.setDnoteItemId(rs.getInt("dnote_item_id"));
-				rNote.setNumPackages(rs.getInt("num_packages"));
+				rNote.setStatus(rs.getString("status"));
 				rNote.setInspector(rs.getInt("inspector"));
 			}
 			connection.close();
@@ -73,7 +73,7 @@ public class RNoteDaoImpl implements RNoteDao {
 	public void save(RNote rNote) {
 		try {
 			Connection connection = DBUtil.getDataSource().getConnection();
-			PreparedStatement ps = connection.prepareStatement("INSERT INTO RECEIVED_NOTE_2(id, date_received, employee_id, supplier_id, dnote_id, dnote_item_id, num_packages, inspector) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
+			PreparedStatement ps = connection.prepareStatement("INSERT INTO RECEIVED_NOTE_2(id, date_received, employee_id, supplier_id, dnote_id, dnote_item_id, inspector, status) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
 
 			ps.setInt(1, rNote.getId());
 			ps.setDate(2, rNote.getDateReceived());
@@ -81,8 +81,8 @@ public class RNoteDaoImpl implements RNoteDao {
 			ps.setInt(4, rNote.getSupplierId());
 			ps.setInt(5, rNote.getDnoteId());
 			ps.setInt(6, rNote.getDnoteItemId());
-			ps.setInt(7, rNote.getNumPackages());
-			ps.setInt(8, rNote.getInspector());
+			ps.setInt(7, rNote.getInspector());
+			ps.setString(8, rNote.getStatus());
 
 			ps.executeQuery();
 			connection.close();
@@ -96,15 +96,15 @@ public class RNoteDaoImpl implements RNoteDao {
 	public void update(RNote rNote) {
 		try {
 			Connection connection = DBUtil.getDataSource().getConnection();
-			PreparedStatement ps = connection.prepareStatement("UPDATE RECEIVED_NOTE_2 SET date_received=?, employee_id=?, supplier_id=?, dnote_id=?, dnote_item_id=?, num_packages=?, inspector=? WHERE id=?");
+			PreparedStatement ps = connection.prepareStatement("UPDATE RECEIVED_NOTE_2 SET date_received=?, employee_id=?, supplier_id=?, dnote_id=?, dnote_item_id=?, inspector=?, status=? WHERE id=?");
 
 			ps.setDate(1, rNote.getDateReceived());
 			ps.setInt(2, rNote.getEmployeeId());
 			ps.setInt(3, rNote.getSupplierId());
 			ps.setInt(4, rNote.getDnoteId());
 			ps.setInt(5, rNote.getDnoteItemId());
-			ps.setInt(6, rNote.getNumPackages());
-			ps.setInt(7, rNote.getEmployeeId());
+			ps.setInt(6, rNote.getInspector());
+			ps.setString(7, rNote.getStatus());
 			ps.setInt(8, rNote.getId());
 
 			ps.executeQuery();

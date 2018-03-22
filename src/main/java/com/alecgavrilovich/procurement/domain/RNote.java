@@ -15,7 +15,7 @@ public class RNote {
 	private Integer supplierId;
 	private Integer dnoteId;
 	private Integer dnoteItemId;
-	private int numPackages;
+	private String status;
 	private Integer inspector;
 	
 	public Integer getId() {
@@ -54,11 +54,12 @@ public class RNote {
 	public void setDnoteItemId(Integer dnoteItemId) {
 		this.dnoteItemId = dnoteItemId;
 	}
-	public int getNumPackages() {
-		return numPackages;
+
+	public String getStatus() {
+		return status;
 	}
-	public void setNumPackages(int numPackages) {
-		this.numPackages = numPackages;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	public Integer getInspector() {
 		return inspector;
