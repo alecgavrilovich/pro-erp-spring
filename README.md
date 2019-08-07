@@ -1,8 +1,6 @@
-# Work in Progress
-
 ## ProERP
 
-Spring Boot full stack web application for procurement procedure.
+Spring Boot full stack web application for procurement.
 
 Technologies:
 
