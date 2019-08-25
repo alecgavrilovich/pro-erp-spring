@@ -1,11 +1,11 @@
-package com.alecgavrilovich.procurement.dao;
+package com.alecgavrilovich.procurement.dbb;
 
 import org.apache.commons.dbcp.BasicDataSource;
 
 public class DBUtil {
 
-	private static final String DB_USERNAME="alec_student";
-	private static final String DB_PASSWORD="kikilija1056";
+	private static final String DB_USERNAME="fpis_live";
+	private static final String DB_PASSWORD="aurelije121";
 	private static final String DB_URL="jdbc:oracle:thin:@localhost:1521:orcl";
 	private static final String DB_DRIVER_CLASS="oracle.jdbc.driver.OracleDriver";
 	
