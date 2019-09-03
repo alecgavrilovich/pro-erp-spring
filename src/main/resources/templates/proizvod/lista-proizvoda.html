@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{home :: header}"></head>
+<body>
+	<div th:insert="~{home :: nav}"></div>
+	<div class="container">
+		
+		<h1>Lista proizvoda</h1>
+		<a class="btn btn-success mb-2" href="/proizvod/noviProizvod">Novi Proizvod</a>
+		<table class="table table-striped">
+				
+				<tr>
+					<th>Id</th>
+					<th>Opis Proizvoda</th>
+					<th>JmId</th>
+				</tr>
+				<tr th:each="pr : ${proizvodi}">
+					<td th:text="${pr.Id}"></td>
+					<td th:text="${pr.OpisPr}"></td>
+					<td th:text="${pr.JmId}"></td>
+				</tr>
+		</table>
+		
+		<div th:fragment="scripts">
+			<script type="text/javascript"
+				src="/webjars/jquery/3.0.0/jquery.min.js"></script>
+			<script type="text/javascript"
+				src="/webjars/popper.js/1.11.1/dist/popper.min.js"></script>
+			<script type="text/javascript"
+				src="/webjars/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+			<script type="text/javascript"
+				th:src="@{/js/scripts.js}"></script>
+		</div>
+	</div>
+	<div th:replace="~{home :: scripts}"></div>
+	<footer th:replace="~{home :: footer}"></footer>
+</body>
+</html>
