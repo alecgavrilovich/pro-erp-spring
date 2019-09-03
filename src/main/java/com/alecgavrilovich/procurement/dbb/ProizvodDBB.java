@@ -42,6 +42,36 @@ public class ProizvodDBB {
 		return proizvodi;
 	}
 	
+	
+	public Proizvod pronadjiProizvod(int id) {
+		
+		Proizvod pr = new Proizvod();
+		
+		try {
+			
+			Connection connection = DBUtil.getDataSource().getConnection();
+			PreparedStatement ps = connection.prepareStatement("SELECT * FROM Proizvod WHERE ID =?");
+			
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			
+			if (rs.next()) {
+				pr.setId(rs.getInt(1));
+				pr.setOpisPr(rs.getString(2));
+				pr.setJmId(rs.getInt(3));
+			}
+			
+			connection.close();
+			
+		} catch (Exception e) {
+			
+			System.out.println(e);
+		}
+		
+		return pr;
+		
+	}
+	
 	public void sacuvajProizvod(Proizvod pr) {
 		
 		

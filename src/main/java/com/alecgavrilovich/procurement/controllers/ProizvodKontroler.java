@@ -29,6 +29,17 @@ public class ProizvodKontroler {
 		return "proizvod/lista-proizvoda";
 	}
 	
+	@RequestMapping("/detalji/{id}")
+	public String pronadjiProizvod(@PathVariable int id, Model model) {
+		
+		Proizvod trazeniPr = prDBB.pronadjiProizvod(id);
+		
+		model.addAttribute("pr", trazeniPr);
+		
+		return "/proizvod/detalji-proizvod";
+		
+	}
+	
 	@RequestMapping("/noviProizvod")
 	public String noviProizvod() {
 		

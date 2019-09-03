@@ -5,24 +5,31 @@
 	<div th:insert="~{home :: nav}"></div>
 	<div class="container">
 		
-		<h1>Lista proizvoda</h1>
-		<a class="btn btn-success mb-2" href="/proizvod/noviProizvod">Novi Proizvod</a>
-		<table class="table table-striped">
+		<form>
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label class="">Sifra proizvoda</label> <p th:text="${pr.id}"></p>
+				</div>
+			</div>
+			
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label class="">Opis Proizvoda</label> <p th:text="${pr.opisPr}"></p>
+				</div>
+			</div>
+			
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label class="">Jedinica Mere</label> <p th:text="${pr.JmId}"></p>
+				</div>
+			</div>
 				
-				<tr>
-					<th>Id</th>
-					<th>Opis Proizvoda</th>
-					<th>JmId</th>
-				</tr>
-				<tr th:each="pr : ${proizvodi}">
-					<td th:text="${pr.Id}"></td>
-					<td th:text="${pr.OpisPr}"></td>
-					<td th:text="${pr.JmId}"></td>
-					<td><a class="btn btn-primary" th:href="${'/proizvod/detalji/' + pr.Id}">Detalji</a></td>
-					<td><a class="btn btn-success" th:href="${'/proizvod/izmeni/' + pr.Id}">Izmeni</a></td>
-					<td><a class="btn btn-danger" th:href="${'/proizvod/izbrisi/' + pr.Id}">Izbrisi</a></td>
-				</tr>
-		</table>
+			<div class="form-group">
+				<div class="">
+					<a th:href="@{/proizvod/lista}" class="btn btn-danger">Nazad</a>
+				</div>
+			</div>
+		</form>
 		
 		<div th:fragment="scripts">
 			<script type="text/javascript"
