@@ -5,26 +5,26 @@
 	<div th:insert="~{home :: nav}"></div>
 	<div class="container">
 		
-		<form th:object="${prForma}" th:action="@{/proizvod/sacuvajProizvod}"
+		<form th:action="@{/proizvod/sacuvajProizvod}"
 			method="post">
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<label class="">Sifra proizvoda</label> <input type="text"
-						class="form-control" th:field="*{id}" />
+						class="form-control" id="id" name="id" value="" />
 				</div>
 			</div>
 			
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<label class="">Opis proizvoda</label> <input type="text"
-						class="form-control" th:field="*{opisPr}" />
+						class="form-control" id="opisPr" name="opisPr" value="" />
 				</div>
 			</div>
 			
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<label class="">Jedinica mere</label> <input type="text"
-						class="form-control" th:field="*{JmId}" />
+						class="form-control" id="JmId" name="JmId" value="" />
 				</div>
 			</div>
 			
