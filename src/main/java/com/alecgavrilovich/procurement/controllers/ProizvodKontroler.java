@@ -6,8 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import com.alecgavrilovich.procurement.dbb.ProizvodDBB;
 import com.alecgavrilovich.procurement.domain.Proizvod;
@@ -41,16 +40,33 @@ public class ProizvodKontroler {
 		
 	}
 	
+//	@RequestMapping(value="/sacuvajProizvod", method = RequestMethod.POST)
+//	public String sacuvajProizvod(@RequestParam("id") int id, @RequestParam("opisPr") String opisPr, @RequestParam("JmId") int JmId) {
+//		
+////		if(bindingResult.hasErrors()){
+////            return "proizvod/novi-proizvod";
+////        }
+//		
+//		pr.setId(id);
+//		pr.setOpisPr(opisPr);
+//		pr.setJmId(JmId);
+//		
+//		prDBB.sacuvajProizvod(pr);
+//		
+//		
+//		return "redirect:/proizvod/lista";
+//	}
+	
 	@RequestMapping(value="/sacuvajProizvod", method = RequestMethod.POST)
-	public String sacuvajProizvod(Proizvod prForma, BindingResult bindingResult) {
+	public String sacuvajProizvod(Proizvod pr, BindingResult  bindingResult) {
 		
 		if(bindingResult.hasErrors()){
             return "proizvod/novi-proizvod";
         }
 		
-		pr.setId(prForma.getId());
-		pr.setOpisPr(prForma.getOpisPr());
-		pr.setJmId(prForma.getJmId());
+		pr.setId(pr.getId());
+		pr.setOpisPr(pr.getOpisPr());
+		pr.setJmId(pr.getJmId());
 		
 		prDBB.sacuvajProizvod(pr);
 		
@@ -58,6 +74,14 @@ public class ProizvodKontroler {
 		return "redirect:/proizvod/lista";
 	}
 	
+	
+	@RequestMapping(value="/izbrisi/{id}")
+	public String izbrisiProizvod(@PathVariable int id) {
+		
+		prDBB.izbrisiProizvod(id);
+		
+		return "redirect:/proizvod/lista";
+	}
 	
 	
 }

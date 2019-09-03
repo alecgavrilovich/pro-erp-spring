@@ -31,6 +31,8 @@ public class ProizvodDBB {
 				
 			}
 			
+			connection.close();
+			
 		} catch (Exception e){
 			System.out.println(e);
 		}
@@ -54,8 +56,29 @@ public class ProizvodDBB {
 			
 			ps.executeQuery();
 			
+			connection.close();
+			
 		} catch (Exception e){
 			System.out.println(e);
 		}
+	}
+	
+	public void izbrisiProizvod(int id) {
+		
+		try {
+			
+			Connection connection = DBUtil.getDataSource().getConnection();
+			PreparedStatement ps = connection.prepareStatement("DELETE FROM Proizvod WHERE ID =?");
+			
+			ps.setInt(1, id);
+			ps.executeQuery();
+			
+			connection.close();
+			
+		} catch (Exception e) {
+			
+			System.out.println(e);
+		}
+		
 	}
 }
