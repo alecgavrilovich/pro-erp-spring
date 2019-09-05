@@ -32,7 +32,7 @@ public class ProizvodKontroler {
 	@RequestMapping("/detalji/{id}")
 	public String pronadjiProizvod(@PathVariable int id, Model model) {
 		
-		Proizvod trazeniPr = prDBB.pronadjiProizvod(id);
+		Proizvod trazeniPr = prDBB.pronadjiPr(id);
 		
 		model.addAttribute("pr", trazeniPr);
 		
@@ -69,5 +69,30 @@ public class ProizvodKontroler {
 		return "redirect:/proizvod/lista";
 	}
 	
+	@RequestMapping("/izmeni/{id}")
+	public String izmeni(@PathVariable int id, Model model) {
+		
+		Proizvod prZaIzmenu = prDBB.pronadjiPr(id);
+		
+		model.addAttribute("prIzmena", prZaIzmenu);
+		
+		return "/proizvod/izmeni-proizvod";
+		
+	}
 	
+	@RequestMapping(value="/sacuvajIzmene", method = RequestMethod.POST)
+	public String sacuvajIzmene(@RequestParam("id") int id, @RequestParam("opisPr") String opisPr, @RequestParam("JmId") int JmId) {
+		
+//		pr.setId(id);
+//		pr.setOpisPr(opisPr);
+//		pr.setJmId(JmId);
+		
+		prDBB.sacuvajIzmene(id, opisPr, JmId);
+		
+		
+		return "redirect:/proizvod/list";
+		
+	}
+		
+		
 }

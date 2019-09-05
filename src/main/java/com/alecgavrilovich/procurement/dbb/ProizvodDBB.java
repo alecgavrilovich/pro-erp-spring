@@ -20,9 +20,10 @@ public class ProizvodDBB {
 			
 			Connection connection = DBUtil.getDataSource().getConnection();
 			Statement st = connection.createStatement();
-			ResultSet rs = st.executeQuery("select * from Proizvod");
+			ResultSet rs = st.executeQuery("SELECT * FROM Proizvod");
 			
 			while(rs.next()) {
+				
 				Proizvod pr = new Proizvod();
 				pr.setId(rs.getInt("id"));
 				pr.setOpisPr(rs.getString("opispr"));
@@ -43,7 +44,7 @@ public class ProizvodDBB {
 	}
 	
 	
-	public Proizvod pronadjiProizvod(int id) {
+	public Proizvod pronadjiPr(int id) {
 		
 		Proizvod pr = new Proizvod();
 		
@@ -83,6 +84,32 @@ public class ProizvodDBB {
 			ps.setInt(1, pr.getId());
 			ps.setString(2, pr.getOpisPr());
 			ps.setInt(3, pr.getJmId());
+			
+			ps.executeQuery();
+			
+			// nakon izvrsavanja nardbe imamo bool vrednost poziva roll back, commit
+			// kontrola nakon transakcijom je kod konrolora
+			
+			connection.close();
+			
+		} catch (Exception e){
+			System.out.println(e);
+		}
+	}
+	
+public void sacuvajIzmene(int id, String opisPr, int JmId) {
+		
+		
+		try {
+			
+			// String queryString = "UPDATE Proizvod SET opispr = " + id + " + ", set jmid = ? WHERE id = ?";
+			Connection connection = DBUtil.getDataSource().getConnection();
+			PreparedStatement ps = connection.prepareStatement("UPDATE Proizvod SET opispr = ?, set jmid = ? WHERE id = ?");
+			
+			
+			ps.setString(1, opisPr);
+			ps.setInt(2, JmId);
+			ps.setInt(3, id);
 			
 			ps.executeQuery();
 			

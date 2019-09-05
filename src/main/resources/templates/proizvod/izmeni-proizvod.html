@@ -4,33 +4,33 @@
 <body>
 	<div th:insert="~{home :: nav}"></div>
 	<div class="container">
-		<h1>Dodaj novi proizvod</h1>
+		<h1>Izmeni proizvod</h1>
 		<form th:action="@{/proizvod/sacuvajProizvod}"
-			method="post">
+			method="post" th:object="${prIzmena}">
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<label class="">Sifra proizvoda</label> <input type="text"
-						class="form-control" id="id" name="id" value="" />
+						class="form-control" th:field="*{id}" />
 				</div>
 			</div>
 			
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<label class="">Opis proizvoda</label> <input type="text"
-						class="form-control" id="opisPr" name="opisPr" value="" />
+						class="form-control" th:field="*{opisPr}" />
 				</div>
 			</div>
 			
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<label class="">Jedinica mere</label> <input type="text"
-						class="form-control" id="JmId" name="JmId" value="" />
+						class="form-control" th:field="*{JmId}" />
 				</div>
 			</div>
 			
 			<div class="form-group">
 				<div class="">
-					<button type="submit" class="btn btn-success">Sacuvaj</button>
+					<button type="submit" class="btn btn-success">Izmeni</button>
 					<a th:href="@{/proizvod/lista}" class="btn btn-danger">Prekini</a>
 				</div>
 			</div>
