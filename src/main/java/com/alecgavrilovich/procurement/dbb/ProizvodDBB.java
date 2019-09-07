@@ -3,7 +3,6 @@ package com.alecgavrilovich.procurement.dbb;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.PreparedStatement;
 
 import org.springframework.stereotype.Component;
 
@@ -12,14 +11,82 @@ import com.alecgavrilovich.procurement.domain.Proizvod;
 @Component
 public class ProizvodDBB {
 	
+	Connection con = null;
+	
+	public Connection openConnection() {
+		
+		try {
+			
+			con = DBUtil.getDataSource().getConnection();
+			con.setAutoCommit(false);
+			
+			
+		} catch (Exception e) {
+			
+			System.out.println(e);
+			
+		}
+		
+		return con;
+		
+	}
+	
+	
+	public void closeConnection() {
+		
+		try {
+			
+			
+			con.setAutoCommit(true);
+			con.close();
+			
+		} catch (SQLException e) {
+			
+			System.out.println(e);
+			
+		}
+		
+	}
+	
+	
+	public void commitTransaction() {
+		
+		try {
+			
+			con.commit();
+			
+		} catch (SQLException e) {
+			
+			System.out.println(e);
+			
+		}
+	}
+	
+	public void rollBackTransaction() {
+		
+		try {
+			
+			con.rollback();
+			
+		} catch (SQLException e) {
+			
+			System.out.println(e);
+		}
+		
+	}
+	
+	
 	public List<Proizvod> pronadjiProizvode() {
 		
 		List<Proizvod> proizvodi = new ArrayList<>();
 		
 		try {
 			
-			Connection connection = DBUtil.getDataSource().getConnection();
-			Statement st = connection.createStatement();
+			
+			// Connection connection = DBUtil.getDataSource().getConnection();
+			
+			openConnection();
+			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery("SELECT * FROM Proizvod");
 			
 			while(rs.next()) {
@@ -30,15 +97,15 @@ public class ProizvodDBB {
 				pr.setJmId(rs.getInt("jmid"));
 				proizvodi.add(pr);
 				
+				// System.out.println(pr.getId());
+				
 			}
 			
-			connection.close();
+			closeConnection();
 			
 		} catch (Exception e){
 			System.out.println(e);
 		}
-		
-		// System.out.println(proizvodi);
 		
 		return proizvodi;
 	}
@@ -50,8 +117,8 @@ public class ProizvodDBB {
 		
 		try {
 			
-			Connection connection = DBUtil.getDataSource().getConnection();
-			PreparedStatement ps = connection.prepareStatement("SELECT * FROM Proizvod WHERE ID =?");
+			openConnection();
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM Proizvod WHERE ID =?");
 			
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
@@ -62,7 +129,7 @@ public class ProizvodDBB {
 				pr.setJmId(rs.getInt(3));
 			}
 			
-			connection.close();
+			closeConnection();
 			
 		} catch (Exception e) {
 			
@@ -73,69 +140,79 @@ public class ProizvodDBB {
 		
 	}
 	
-	public void sacuvajProizvod(Proizvod pr) {
+	public boolean sacuvajProizvod(Proizvod pr) {
 		
+		
+		boolean ret = false;
 		
 		try {
 			
-			Connection connection = DBUtil.getDataSource().getConnection();
-			PreparedStatement ps = connection.prepareStatement("INSERT INTO Proizvod VALUES(?, ?, ?)");
+			openConnection();
+			PreparedStatement ps = con.prepareStatement("INSERT INTO Proizvod VALUES(?, ?, ?)");
 			
 			ps.setInt(1, pr.getId());
 			ps.setString(2, pr.getOpisPr());
 			ps.setInt(3, pr.getJmId());
 			
-			ps.executeQuery();
+			ret = ps.executeQuery() != null;
 			
 			// nakon izvrsavanja nardbe imamo bool vrednost poziva roll back, commit
 			// kontrola nakon transakcijom je kod konrolora
 			
-			connection.close();
 			
-		} catch (Exception e){
+		} catch (SQLException e){
 			System.out.println(e);
 		}
+		
+		return ret;
+		
 	}
 	
-public void sacuvajIzmene(int id, String opisPr, int JmId) {
+	public boolean sacuvajIzmene(int id, String opisPr, int JmId) {
 		
+		
+		boolean ret = false;
 		
 		try {
 			
-			// String queryString = "UPDATE Proizvod SET opispr = " + id + " + ", set jmid = ? WHERE id = ?";
-			Connection connection = DBUtil.getDataSource().getConnection();
-			PreparedStatement ps = connection.prepareStatement("UPDATE Proizvod SET opispr = ?, set jmid = ? WHERE id = ?");
+			openConnection();
+			PreparedStatement ps = con.prepareStatement("UPDATE Proizvod SET opispr = ?, jmid = ? WHERE id = ?");
 			
-			
+			ps.setInt(3, id);
 			ps.setString(1, opisPr);
 			ps.setInt(2, JmId);
-			ps.setInt(3, id);
 			
-			ps.executeQuery();
 			
-			connection.close();
+			ret = ps.executeQuery() != null;
 			
 		} catch (Exception e){
 			System.out.println(e);
 		}
+		
+		return ret;
+		
 	}
 	
-	public void izbrisiProizvod(int id) {
+	public boolean izbrisiProizvod(int id) {
+		
+		boolean ret = false;
 		
 		try {
 			
-			Connection connection = DBUtil.getDataSource().getConnection();
-			PreparedStatement ps = connection.prepareStatement("DELETE FROM Proizvod WHERE ID =?");
+			openConnection();
+			PreparedStatement ps = con.prepareStatement("DELETE FROM Proizvod WHERE ID =?");
 			
 			ps.setInt(1, id);
-			ps.executeQuery();
+			ret = ps.executeQuery() != null;
 			
-			connection.close();
+			
 			
 		} catch (Exception e) {
 			
 			System.out.println(e);
 		}
+		
+		return ret;
 		
 	}
 }

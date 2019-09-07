@@ -50,24 +50,32 @@ public class ProizvodKontroler {
 	@RequestMapping(value="/sacuvajProizvod", method = RequestMethod.POST)
 	public String sacuvajProizvod(@RequestParam("id") int id, @RequestParam("opisPr") String opisPr, @RequestParam("JmId") int JmId) {
 		
+		boolean ret = false;
+		
 		pr.setId(id);
 		pr.setOpisPr(opisPr);
 		pr.setJmId(JmId);
 		
-		prDBB.sacuvajProizvod(pr);
+		ret = prDBB.sacuvajProizvod(pr);
 		
+		if (ret) {
+			
+			System.out.println(ret);
+			prDBB.commitTransaction();
+			
+		} else {
+			
+			System.out.println(ret);
+			prDBB.rollBackTransaction();
+		}
+		
+		prDBB.closeConnection();
 		
 		return "redirect:/proizvod/lista";
 	}
 	
 	
-	@RequestMapping(value="/izbrisi/{id}")
-	public String izbrisiProizvod(@PathVariable int id) {
-		
-		prDBB.izbrisiProizvod(id);
-		
-		return "redirect:/proizvod/lista";
-	}
+	
 	
 	@RequestMapping("/izmeni/{id}")
 	public String izmeni(@PathVariable int id, Model model) {
@@ -83,15 +91,50 @@ public class ProizvodKontroler {
 	@RequestMapping(value="/sacuvajIzmene", method = RequestMethod.POST)
 	public String sacuvajIzmene(@RequestParam("id") int id, @RequestParam("opisPr") String opisPr, @RequestParam("JmId") int JmId) {
 		
-//		pr.setId(id);
-//		pr.setOpisPr(opisPr);
-//		pr.setJmId(JmId);
+		boolean ret = false;
 		
-		prDBB.sacuvajIzmene(id, opisPr, JmId);
+		ret = prDBB.sacuvajIzmene(id, opisPr, JmId);
+		
+		if (ret) {
+			
+			System.out.println(ret);
+			prDBB.commitTransaction();
+			
+		} else {
+			
+			System.out.println(ret);
+			prDBB.rollBackTransaction();
+		}
+		
+		prDBB.closeConnection();
+		
+		return "redirect:/proizvod/lista";
+		
+	}
+	
+	
+	@RequestMapping(value="/izbrisi/{id}")
+	public String izbrisiProizvod(@PathVariable int id) {
+		
+		boolean ret = false;
+		
+		ret = prDBB.izbrisiProizvod(id);
+		
+		if (ret) {
+			
+			System.out.println(ret);
+			prDBB.commitTransaction();
+			
+		} else {
+			
+			System.out.println(ret);
+			prDBB.rollBackTransaction();
+		}
+		
+		prDBB.closeConnection();
 		
 		
-		return "redirect:/proizvod/list";
-		
+		return "redirect:/proizvod/lista";
 	}
 		
 		
