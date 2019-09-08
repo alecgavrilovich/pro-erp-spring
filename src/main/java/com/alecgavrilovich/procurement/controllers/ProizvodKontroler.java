@@ -60,12 +60,10 @@ public class ProizvodKontroler {
 		
 		if (ret) {
 			
-			System.out.println(ret);
 			prDBB.commitTransaction();
 			
 		} else {
 			
-			System.out.println(ret);
 			prDBB.rollBackTransaction();
 		}
 		
@@ -97,12 +95,11 @@ public class ProizvodKontroler {
 		
 		if (ret) {
 			
-			System.out.println(ret);
+
 			prDBB.commitTransaction();
 			
 		} else {
 			
-			System.out.println(ret);
 			prDBB.rollBackTransaction();
 		}
 		
@@ -122,12 +119,10 @@ public class ProizvodKontroler {
 		
 		if (ret) {
 			
-			System.out.println(ret);
 			prDBB.commitTransaction();
 			
 		} else {
 			
-			System.out.println(ret);
 			prDBB.rollBackTransaction();
 		}
 		
@@ -135,7 +130,6 @@ public class ProizvodKontroler {
 		
 		
 		return "redirect:/proizvod/lista";
-	}
-		
+	}	
 		
 }
