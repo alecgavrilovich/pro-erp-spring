@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{home :: header}"></head>
+<body>
+	<div th:insert="~{home :: nav}"></div>
+	<div class="container">
+		
+		<a class="btn btn-primary mb-4" href="/zzp/" role="button">Nazad</a>
+		<div class="row">
+			<div class="col-sm-6">
+				<h5>Zahtev za ponudu</h5>
+				<h2 th:text="'No.' + ${zzp.sifraZZP}"></h2>
+			</div>
+		</div>
+		<form>
+			<div class="form-group row">
+				<label for="zzp_datum" class="col-sm-2 col-form-label">Datum: </label>
+				<div class="col-sm-10">
+					<p class="form-control-plaintext" id="zzp_datum"
+						th:text="${zzp.datum}"></p>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="zzp_sifraDob" class="col-sm-2 col-form-label">Sifra Dobavljaca: </label>
+				<div class="col-sm-10">
+					<p class="form-control-plaintext" id="zzp_sifraDob"
+						th:text="${zzp.sifraDob}"></p>
+				</div>
+			</div>
+		</form>
+		
+		<h3>Stavke</h3>
+		
+		<table class="table table-striped">
+				<tr>
+					<th>Sifra ZZP</th>
+					<th>Redni Broj</th>
+					<th>Status</th>
+					<th>Sifra Proizvoda</th>
+					<th>Opis Proizvoda</th>
+					<th>Kolicina</th>
+					<th>Cena</th>
+					<th>Cena za Kom</th>
+					<th>Vrednost</th>
+					<th>Valuta</th>
+				</tr>
+				<tr th:each="st : ${stavke}">
+					<td th:text="${st.sifraZZP}"></td>
+					<td th:text="${st.redniBr}"></td>
+					<td th:text="${st.status}"></td>
+					<td th:text="${st.sifraPr}"></td>
+					<td th:text="${st.opisPr}"></td>
+					<td th:text="${st.kolicina}"></td>
+					<td th:text="${st.cena}"></td>
+					<td th:text="${st.cenaZaKom}"></td>
+					<td th:text="${st.vrednost}"></td>
+					<td th:text="${st.valutaOpis}"></td>
+				</tr>
+			</table>
+		
+		<div th:fragment="scripts">
+			<script type="text/javascript"
+				src="/webjars/jquery/3.0.0/jquery.min.js"></script>
+			<script type="text/javascript"
+				src="/webjars/popper.js/1.11.1/dist/popper.min.js"></script>
+			<script type="text/javascript"
+				src="/webjars/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+			<script type="text/javascript"
+				th:src="@{/js/scripts.js}"></script>
+		</div>
+	</div>
+	<div th:replace="~{home :: scripts}"></div>
+	<footer th:replace="~{home :: footer}"></footer>
+</body>
+</html>

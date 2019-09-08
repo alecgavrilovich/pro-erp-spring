@@ -1,22 +1,37 @@
 package com.alecgavrilovich.procurement.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 
 @Entity
+@IdClass(StavkaZZPId.class)
 public class StavkaZZP {
 	
 	@Id
+	@Column(name="SIFRAZZP")
 	private Integer sifraZZP;
+	@Id
+	@Column(name="REDNIBR")
 	private Integer redniBr;
+	@Column(name="STATUS")
 	private int status;
+	@Column(name="SIFRAPR")
 	private Integer sifraPr;
+	@Column(name="OPISPR")
 	private String opisPr;
+	@Column(name="KOLICINA")
 	private Integer kolicina;
+	@Column(name="CENA")
 	private Integer cena;
+	@Column(name="CENAZAKOM")
 	private Integer cenaZaKom;
+	@Column(name="VREDNOST")
 	private Integer vrednost;
-	private Integer valuraId;
+	@Column(name="VALUTAID")
+	private Integer valutaId;
+	@Column(name="VALUTAOPIS")
 	private String valutaOpis;
 	
 	public Integer getSifraZZP() {
@@ -73,11 +88,11 @@ public class StavkaZZP {
 	public void setVrednost(Integer vrednost) {
 		this.vrednost = vrednost;
 	}
-	public Integer getValuraId() {
-		return valuraId;
+	public Integer getValutaId() {
+		return valutaId;
 	}
-	public void setValuraId(Integer valuraId) {
-		this.valuraId = valuraId;
+	public void setValutaId(Integer valutaId) {
+		this.valutaId = valutaId;
 	}
 	public String getValutaOpis() {
 		return valutaOpis;
