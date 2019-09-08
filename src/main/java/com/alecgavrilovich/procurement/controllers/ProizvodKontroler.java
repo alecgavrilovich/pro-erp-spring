@@ -36,7 +36,7 @@ public class ProizvodKontroler {
 		
 		model.addAttribute("pr", trazeniPr);
 		
-		return "/proizvod/detalji-proizvod";
+		return "proizvod/detalji-proizvod";
 		
 	}
 	

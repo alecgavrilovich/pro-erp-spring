@@ -1,7 +1,12 @@
 package com.alecgavrilovich.procurement.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class StavkaZZP {
 	
+	@Id
 	private Integer sifraZZP;
 	private Integer redniBr;
 	private int status;
@@ -14,70 +19,70 @@ public class StavkaZZP {
 	private Integer valuraId;
 	private String valutaOpis;
 	
-	public Integer vratiSifraZZP() {
+	public Integer getSifraZZP() {
 		return sifraZZP;
 	}
-	public void postaviSifraZZP(Integer sifraZZP) {
+	public void setSifraZZP(Integer sifraZZP) {
 		this.sifraZZP = sifraZZP;
 	}
-	public Integer vratiRedniBr() {
+	public Integer getRedniBr() {
 		return redniBr;
 	}
-	public void postaviRedniBr(Integer redniBr) {
+	public void setRedniBr(Integer redniBr) {
 		this.redniBr = redniBr;
 	}
-	public int vratiStatus() {
+	public int getStatus() {
 		return status;
 	}
-	public void postaviStatus(int status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
-	public Integer vratiSifraPr() {
+	public Integer getSifraPr() {
 		return sifraPr;
 	}
-	public void postaviSifraPr(Integer sifraPr) {
+	public void setSifraPr(Integer sifraPr) {
 		this.sifraPr = sifraPr;
 	}
-	public String vratiOpisPr() {
+	public String getOpisPr() {
 		return opisPr;
 	}
-	public void postaviOpisPr(String opisPr) {
+	public void setOpisPr(String opisPr) {
 		this.opisPr = opisPr;
 	}
-	public Integer vratiKolicina() {
+	public Integer getKolicina() {
 		return kolicina;
 	}
-	public void postaviKolicina(Integer kolicina) {
+	public void setKolicina(Integer kolicina) {
 		this.kolicina = kolicina;
 	}
-	public Integer vratiCena() {
+	public Integer getCena() {
 		return cena;
 	}
-	public void postaviCena(Integer cena) {
+	public void setCena(Integer cena) {
 		this.cena = cena;
 	}
-	public Integer vratiCenaZaKom() {
+	public Integer getCenaZaKom() {
 		return cenaZaKom;
 	}
-	public void postaviCenaZaKom(Integer cenaZaKom) {
+	public void setCenaZaKom(Integer cenaZaKom) {
 		this.cenaZaKom = cenaZaKom;
 	}
-	public Integer vratiVrednost() {
+	public Integer getVrednost() {
 		return vrednost;
 	}
-	public void postaviVrednost(Integer vrednost) {
+	public void setVrednost(Integer vrednost) {
 		this.vrednost = vrednost;
 	}
-	public Integer vratiValuraId() {
+	public Integer getValuraId() {
 		return valuraId;
 	}
-	public void postaviValuraId(Integer valuraId) {
+	public void setValuraId(Integer valuraId) {
 		this.valuraId = valuraId;
 	}
-	public String vratiValutaOpis() {
+	public String getValutaOpis() {
 		return valutaOpis;
 	}
-	public void postaviValutaOpis(String valutaOpis) {
+	public void setValutaOpis(String valutaOpis) {
 		this.valutaOpis = valutaOpis;
 	}
 	

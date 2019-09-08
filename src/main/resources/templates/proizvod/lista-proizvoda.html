@@ -18,9 +18,9 @@
 					<td th:text="${pr.Id}"></td>
 					<td th:text="${pr.OpisPr}"></td>
 					<td th:text="${pr.JmId}"></td>
-					<td><a class="btn btn-primary" th:href="${'/proizvod/detalji/' + pr.Id}">Detalji</a></td>
-					<td><a class="btn btn-success" th:href="${'/proizvod/izmeni/' + pr.Id}">Izmeni</a></td>
-					<td><a class="btn btn-danger" th:href="${'/proizvod/izbrisi/' + pr.Id}">Izbrisi</a></td>
+					<td><a th:href="${'/proizvod/detalji/' + pr.Id}">Detalji</a></td>
+					<td><a th:href="${'/proizvod/izmeni/' + pr.Id}">Izmeni</a></td>
+					<td><a th:href="${'/proizvod/izbrisi/' + pr.Id}">Izbrisi</a></td>
 				</tr>
 		</table>
 		
