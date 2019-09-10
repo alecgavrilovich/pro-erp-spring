@@ -5,6 +5,111 @@
 	<div th:insert="~{home :: nav}"></div>
 	<div class="container">
 		
+		<form method="post" th:action="@{/zzp/sacuvajZZP}">
+		
+			<div class="form-row">
+				<div class="form-group">
+					<button type="submit" class="btn btn-success">Sacuvaj</button>
+					<a th:href="@{/zzp}" class="btn btn-danger">Prekini</a>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-sm-6">
+					<h3>Novi - Zahtev za Ponudu</h3>
+				</div>
+			</div>
+			
+			<div class="form-row">
+				<div class="col">
+					<label for="sifra_zzp" class="">Sifra ZZP: </label>
+					<p th:text="${sifraNovogZZP}" ></p>
+				</div>
+				
+				<div class="col">
+					<label for="datum_zzp" class="">Datum: </label>	
+					<p th:text="${datumZZP}"></p>
+				</div>
+				
+				<div class="col">
+					<label for="datum_zzp" class="">Vrednost: </label>
+					<input type="number" class="form-control" name="vrednostZZP" readonly>	
+				</div>
+				
+			</div>
+			
+			<div class="form-row">
+				<div class="col">
+					<label for="zzp_sifraDob" class="">Sifra Dobavljaca: </label>
+					<input type="number" class="form-control" name="sifraDob">	
+				</div>
+				<div class="col">
+					<label for="imeDob" class="">Ime Dobavljaca: </label>
+					<p></p>	
+				</div>
+				
+				<div class="col">
+					<label for="valutaZZP" class="">Valuta: </label>
+					<input type="number" class="form-control" name="valutaZZP">	
+				</div>
+			</div>
+				
+			<br>
+		
+			<h3>Stavke</h3>
+			
+			<div class="form-group" >
+				<div class="form-row" id="novaStavka">
+					<div class="col">
+				         <label >Sfira Pr:</label>	    
+					     <input type="number" class="form-control" placeholder="">
+				    </div>
+				    <div class="col">
+				    	<label >Kolicina:</label>	 
+				      	<input type="number" class="form-control" placeholder="">
+				    </div>
+				    <div class="col">
+				    	<label >Jedinica Mere:</label>	 
+				      	<input type="text" class="form-control" placeholder="">
+				    </div>
+				    <div class="col">
+				    	<label >Cena:</label>	 
+				      	<input type="text" class="form-control" placeholder="">
+				    </div>
+				    <div class="col">
+				    	<label >CenaZaKom:</label>	 
+				      	<input type="text" class="form-control" placeholder="">
+				    </div>
+	  			</div>
+			</div>
+			
+			<div class="form-row">
+				<div class="form-group">
+					<button class="btn btn-success">Dodaj</button>
+					<button class="btn btn-success">Obrisi</button>
+	  			</div>
+			</div>
+			
+			
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Sifra ZZP</th>
+						<th>Redni Broj</th>
+						<th>Status</th>
+						<th>Sifra Proizvoda</th>
+						<th>Opis Proizvoda</th>
+						<th>Kolicina</th>
+						<th>Cena</th>
+						<th>Cena za Kom</th>
+						<th>Vrednost</th>
+						<th>Valuta</th>
+					</tr>
+				</thead>
+				<tbody id="stavkeZZP">
+				</tbody>
+			</table>
+			
+		</form>
 		
 		<div th:fragment="scripts">
 			<script type="text/javascript"

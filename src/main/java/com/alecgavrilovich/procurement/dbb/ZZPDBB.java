@@ -1,5 +1,9 @@
 package com.alecgavrilovich.procurement.dbb;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +19,7 @@ public class ZZPDBB {
 	
 	private IZZPRepo zzpRepo;
 	private IStavkaZZPRepo stZZPRepo;
+	Connection con = null;
 	
 	@Autowired
 	public ZZPDBB (IZZPRepo zzpRepo, IStavkaZZPRepo stZZPRepo) {
@@ -22,6 +27,70 @@ public class ZZPDBB {
 		this.zzpRepo = zzpRepo;
 		this.stZZPRepo = stZZPRepo;
 	}
+	
+	
+	public Connection openConnection() {
+		
+		try {
+			
+			con = DBUtil.getDataSource().getConnection();
+			con.setAutoCommit(false);
+			
+			
+		} catch (Exception e) {
+			
+			System.out.println(e);
+			
+		}
+		
+		return con;
+		
+	}
+	
+	
+	public void closeConnection() {
+		
+		try {
+			
+			
+			con.setAutoCommit(true);
+			con.close();
+			
+		} catch (SQLException e) {
+			
+			System.out.println(e);
+			
+		}
+		
+	}
+	
+	
+	public void commitTransaction() {
+		
+		try {
+			
+			con.commit();
+			
+		} catch (SQLException e) {
+			
+			System.out.println(e);
+			
+		}
+	}
+	
+	public void rollBackTransaction() {
+		
+		try {
+			
+			con.rollback();
+			
+		} catch (SQLException e) {
+			
+			System.out.println(e);
+		}
+		
+	}
+	
 	
 	
 	public List<ZZP> pronadjiSveZZP() {
@@ -56,6 +125,39 @@ public class ZZPDBB {
 		trazeniZZP.setStavke(stavkeTrazenogZZP);
 		
 		return trazeniZZP;
+	}
+	
+	
+	public Integer vratiSifruZZP() {
+		
+		Integer sifraNovogZZP = null;
+		
+		try {
+			
+			openConnection();
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery("SELECT zzp_seq.nextval FROM dual");
+			
+			if (rs.next()) {
+				
+				sifraNovogZZP = rs.getInt(1);
+				
+			}
+			
+			closeConnection();
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		return sifraNovogZZP;
+		
+	}
+	
+	public void sacuvajZZP(ZZP zzp) {
+		
+		zzpRepo.save(zzp);
+		
 	}
 	
 	
