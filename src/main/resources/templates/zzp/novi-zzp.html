@@ -5,54 +5,55 @@
 	<div th:insert="~{home :: nav}"></div>
 	<div class="container">
 		
-		<form method="post" th:action="@{/zzp/sacuvajZZP}">
+			<form method="post" th:action="@{/zzp/sacuvajZZP}">
 		
-			<div class="form-row">
-				<div class="form-group">
-					<button type="submit" class="btn btn-success">Sacuvaj</button>
-					<a th:href="@{/zzp}" class="btn btn-danger">Prekini</a>
+				<div class="form-row">
+					<div class="form-group">
+						<button type="submit" class="btn btn-success">Sacuvaj</button>
+						<a th:href="@{/zzp}" class="btn btn-danger">Prekini</a>
+					</div>
 				</div>
-			</div>
-			<div class="form-row">
-				<div class="form-group col-sm-6">
-					<h3>Novi - Zahtev za Ponudu</h3>
+				<div class="form-row">
+					<div class="form-group col-sm-6">
+						<h3>Novi - Zahtev za Ponudu</h3>
+					</div>
 				</div>
-			</div>
+				
+				<div class="form-row">
+					<div class="col">
+						<label for="sifra_zzp" class="">Sifra ZZP: </label>
+						<p th:text="${sifraNovogZZP}" ></p>
+					</div>
+					
+					<div class="col">
+						<label for="datum_zzp" class="">Datum: </label>	
+						<p th:text="${datumZZP}"></p>
+					</div>
+					
+					<div class="col">
+						<label for="datum_zzp" class="">Vrednost: </label>
+						<input type="number" class="form-control" name="vrednostZZP" readonly>	
+					</div>
+					
+				</div>
+				
+				<div class="form-row">
+					<div class="col">
+						<label for="zzp_sifraDob" class="">Sifra Dobavljaca: </label>
+						<input type="number" class="form-control" name="sifraDob">	
+					</div>
+					<div class="col">
+						<label for="imeDob" class="">Ime Dobavljaca: </label>
+						<p></p>	
+					</div>
+					
+					<div class="col">
+						<label for="valutaZZP" class="">Valuta: </label>
+						<input type="number" class="form-control" name="valutaZZP">	
+					</div>
+				</div>
+			</form>
 			
-			<div class="form-row">
-				<div class="col">
-					<label for="sifra_zzp" class="">Sifra ZZP: </label>
-					<p th:text="${sifraNovogZZP}" ></p>
-				</div>
-				
-				<div class="col">
-					<label for="datum_zzp" class="">Datum: </label>	
-					<p th:text="${datumZZP}"></p>
-				</div>
-				
-				<div class="col">
-					<label for="datum_zzp" class="">Vrednost: </label>
-					<input type="number" class="form-control" name="vrednostZZP" readonly>	
-				</div>
-				
-			</div>
-			
-			<div class="form-row">
-				<div class="col">
-					<label for="zzp_sifraDob" class="">Sifra Dobavljaca: </label>
-					<input type="number" class="form-control" name="sifraDob">	
-				</div>
-				<div class="col">
-					<label for="imeDob" class="">Ime Dobavljaca: </label>
-					<p></p>	
-				</div>
-				
-				<div class="col">
-					<label for="valutaZZP" class="">Valuta: </label>
-					<input type="number" class="form-control" name="valutaZZP">	
-				</div>
-			</div>
-				
 			<br>
 		
 			<h3>Stavke</h3>
@@ -61,23 +62,23 @@
 				<div class="form-row" id="novaStavka">
 					<div class="col">
 				         <label >Sfira Pr:</label>	    
-					     <input type="number" class="form-control" placeholder="">
+					     <input type="number" class="form-control polje-nove-stavke" placeholder="" value="1" id="test4">
 				    </div>
 				    <div class="col">
 				    	<label >Kolicina:</label>	 
-				      	<input type="number" class="form-control" placeholder="">
+				      	<input type="number" class="form-control polje-nove-stavke" placeholder="">
 				    </div>
 				    <div class="col">
 				    	<label >Jedinica Mere:</label>	 
-				      	<input type="text" class="form-control" placeholder="">
+				      	<input type="text" class="form-control polje-nove-stavke" placeholder="">
 				    </div>
 				    <div class="col">
 				    	<label >Cena:</label>	 
-				      	<input type="text" class="form-control" placeholder="">
+				      	<input type="text" class="form-control polje-nove-stavke" placeholder="">
 				    </div>
 				    <div class="col">
 				    	<label >CenaZaKom:</label>	 
-				      	<input type="text" class="form-control" placeholder="">
+				      	<input type="text" class="form-control polje-nove-stavke" placeholder="">
 				    </div>
 	  			</div>
 			</div>
@@ -85,7 +86,7 @@
 			<div class="form-row">
 				<div class="form-group">
 					<button class="btn btn-success">Dodaj</button>
-					<button class="btn btn-success">Obrisi</button>
+					<button class="btn btn-danger" id="ocistiFormuZaStavku">Obrisi</button>
 	  			</div>
 			</div>
 			
@@ -108,8 +109,6 @@
 				<tbody id="stavkeZZP">
 				</tbody>
 			</table>
-			
-		</form>
 		
 		<div th:fragment="scripts">
 			<script type="text/javascript"
