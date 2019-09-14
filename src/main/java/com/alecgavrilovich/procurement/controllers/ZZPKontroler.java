@@ -2,7 +2,11 @@ package com.alecgavrilovich.procurement.controllers;
 
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.alecgavrilovich.procurement.dbb.ZZPDBB;
 import com.alecgavrilovich.procurement.domain.StavkaZZP;
 import com.alecgavrilovich.procurement.domain.ZZP;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 
 
 @Controller
@@ -25,6 +30,8 @@ public class ZZPKontroler {
 	private ZZPDBB zzpDBB;
 	
 	private ZZP zzp = new ZZP();
+	
+	private List<StavkaZZP> stavkeNovogZZP = new ArrayList<>();
 	
 	@RequestMapping("")
 	public String pronadjiSveZZP(Model model) {
@@ -86,6 +93,23 @@ public class ZZPKontroler {
 		zzpDBB.sacuvajZZP(zzp);
 		
 		return "redirect:/zzp";
+		
+	}
+	
+	@RequestMapping(value="/dodajStavku", method = RequestMethod.POST, produces = "application/json")
+	public String dodajStavku(HttpServletRequest req, HttpServletResponse resp) {
+		
+		Integer sifraPrNoveStavke = Integer.valueOf(req.getParameter("sifraPr"));
+		
+		StavkaZZP novaStavka = new StavkaZZP();
+		
+		novaStavka.setSifraPr(sifraPrNoveStavke);
+		
+		stavkeNovogZZP.add(novaStavka);
+		
+		System.out.println(stavkeNovogZZP.size());
+		
+		return "dummy";
 		
 	}
 	

@@ -22,7 +22,7 @@
 				<div class="form-row">
 					<div class="col">
 						<label for="sifra_zzp" class="">Sifra ZZP: </label>
-						<p th:text="${sifraNovogZZP}" ></p>
+						<p th:text="${sifraNovogZZP}" id="sifraZZP"></p>
 					</div>
 					
 					<div class="col">
@@ -49,7 +49,7 @@
 					
 					<div class="col">
 						<label for="valutaZZP" class="">Valuta: </label>
-						<input type="number" class="form-control" name="valutaZZP">	
+						<input id="valutaZZP" type="number" class="form-control" name="valutaZZP">	
 					</div>
 				</div>
 			</form>
@@ -62,30 +62,30 @@
 				<div class="form-row" id="novaStavka">
 					<div class="col">
 				         <label >Sfira Pr:</label>	    
-					     <input type="number" class="form-control polje-nove-stavke" placeholder="" value="1" id="test4">
+					     <input id="sifraPrNoveStavke" type="number" class="form-control polje-nove-stavke" placeholder="" value="">
 				    </div>
 				    <div class="col">
 				    	<label >Kolicina:</label>	 
-				      	<input type="number" class="form-control polje-nove-stavke" placeholder="">
+				      	<input id="kolicinaNoveStavke" type="number" class="form-control polje-nove-stavke" placeholder="">
 				    </div>
 				    <div class="col">
 				    	<label >Jedinica Mere:</label>	 
-				      	<input type="text" class="form-control polje-nove-stavke" placeholder="">
+				      	<input id="jmNoveStavke" type="text" class="form-control polje-nove-stavke" placeholder="">
 				    </div>
 				    <div class="col">
 				    	<label >Cena:</label>	 
-				      	<input type="text" class="form-control polje-nove-stavke" placeholder="">
+				      	<input id="cenaNoveStavke" type="text" class="form-control polje-nove-stavke" placeholder="">
 				    </div>
 				    <div class="col">
 				    	<label >CenaZaKom:</label>	 
-				      	<input type="text" class="form-control polje-nove-stavke" placeholder="">
+				      	<input id="cenaZaKomNoveStavke" type="text" class="form-control polje-nove-stavke" placeholder="">
 				    </div>
 	  			</div>
 			</div>
 			
 			<div class="form-row">
-				<div class="form-group">
-					<button class="btn btn-success">Dodaj</button>
+				<div class="form-group" id="test8">
+					<button class="btn btn-success" id="dugmeZaNovuStavku">Dodaj</button>
 					<button class="btn btn-danger" id="ocistiFormuZaStavku">Obrisi</button>
 	  			</div>
 			</div>
@@ -105,21 +105,12 @@
 						<th>Vrednost</th>
 						<th>Valuta</th>
 					</tr>
-				</thead>
+				</thead>	
 				<tbody id="stavkeZZP">
 				</tbody>
+				
 			</table>
-		
-		<div th:fragment="scripts">
-			<script type="text/javascript"
-				src="/webjars/jquery/3.0.0/jquery.min.js"></script>
-			<script type="text/javascript"
-				src="/webjars/popper.js/1.11.1/dist/popper.min.js"></script>
-			<script type="text/javascript"
-				src="/webjars/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
-			<script type="text/javascript"
-				th:src="@{/js/scripts.js}"></script>
-		</div>
+
 	</div>
 	<div th:replace="~{home :: scripts}"></div>
 	<footer th:replace="~{home :: footer}"></footer>
