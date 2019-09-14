@@ -23,6 +23,8 @@ public class ZZP {
 	private String imeDob;
 	@Column(name="VREDNOSTZZP")
 	private Integer vrednostZZP;
+	@Column(name="VALUTA")
+	private String valuta;
 	@Transient
 	private List<StavkaZZP> stavke;
 	
@@ -62,5 +64,10 @@ public class ZZP {
 	public void setStavke(List<StavkaZZP> stavke) {
 		this.stavke = stavke;
 	}
-	
+	public String getValuta() {
+		return valuta;
+	}
+	public void setValuta(String valuta) {
+		this.valuta = valuta;
+	}
 }

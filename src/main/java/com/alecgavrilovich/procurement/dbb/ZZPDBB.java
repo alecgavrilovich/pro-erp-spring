@@ -10,8 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.alecgavrilovich.procurement.domain.StavkaZZP;
+import com.alecgavrilovich.procurement.domain.Valuta;
 import com.alecgavrilovich.procurement.domain.ZZP;
 import com.alecgavrilovich.procurement.repositories.IStavkaZZPRepo;
+import com.alecgavrilovich.procurement.repositories.IValutaRepo;
 import com.alecgavrilovich.procurement.repositories.IZZPRepo;
 
 @Component
@@ -19,13 +21,15 @@ public class ZZPDBB {
 	
 	private IZZPRepo zzpRepo;
 	private IStavkaZZPRepo stZZPRepo;
+	private IValutaRepo valutaRepo;
 	Connection con = null;
 	
 	@Autowired
-	public ZZPDBB (IZZPRepo zzpRepo, IStavkaZZPRepo stZZPRepo) {
+	public ZZPDBB (IZZPRepo zzpRepo, IStavkaZZPRepo stZZPRepo, IValutaRepo valutaRepo) {
 		
 		this.zzpRepo = zzpRepo;
 		this.stZZPRepo = stZZPRepo;
+		this.valutaRepo = valutaRepo;
 	}
 	
 	
@@ -164,6 +168,16 @@ public class ZZPDBB {
 	public void izbrisiZZP(Integer sifraZZP) {
 		
 		zzpRepo.delete(sifraZZP);
+		
+	}
+	
+	public List<Valuta> vratiValute() {
+		
+		List<Valuta> listaValuta = new ArrayList<>();
+		
+		valutaRepo.findAll().forEach(listaValuta::add);
+		
+		return listaValuta;
 		
 	}
 

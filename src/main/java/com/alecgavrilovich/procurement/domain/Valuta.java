@@ -1,20 +1,29 @@
 package com.alecgavrilovich.procurement.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="VALUTA")
 public class Valuta {
 	
-	private Integer id;
+	@Id
+	private String id;
+	@Column(name="OPISVAL")
 	private String opisVal;
 	
-	public Integer vratiId() {
+	public String getId() {
 		return id;
 	}
-	public void postaviId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
-	public String vratiOpisVal() {
+	public String getOpisVal() {
 		return opisVal;
 	}
-	public void postaviOpisVal(String opisVal) {
+	public void setOpisVal(String opisVal) {
 		this.opisVal = opisVal;
 	}
 

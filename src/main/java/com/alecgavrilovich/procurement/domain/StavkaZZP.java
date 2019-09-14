@@ -28,11 +28,9 @@ public class StavkaZZP {
 	@Column(name="CENAZAKOM")
 	private Integer cenaZaKom;
 	@Column(name="VREDNOST")
-	private Integer vrednost;
+	private double vrednost;
 	@Column(name="VALUTAID")
-	private Integer valutaId;
-	@Column(name="VALUTAOPIS")
-	private String valutaOpis;
+	private String valutaId;
 	
 	public Integer getSifraZZP() {
 		return sifraZZP;
@@ -82,23 +80,17 @@ public class StavkaZZP {
 	public void setCenaZaKom(Integer cenaZaKom) {
 		this.cenaZaKom = cenaZaKom;
 	}
-	public Integer getVrednost() {
+	public double getVrednost() {
 		return vrednost;
 	}
-	public void setVrednost(Integer vrednost) {
-		this.vrednost = vrednost;
+	public void setVrednost(double vrednostNoveStavke) {
+		this.vrednost = vrednostNoveStavke;
 	}
-	public Integer getValutaId() {
+	public String getValutaId() {
 		return valutaId;
 	}
-	public void setValutaId(Integer valutaId) {
+	public void setValutaId(String valutaId) {
 		this.valutaId = valutaId;
-	}
-	public String getValutaOpis() {
-		return valutaOpis;
-	}
-	public void setValutaOpis(String valutaOpis) {
-		this.valutaOpis = valutaOpis;
 	}
 	
 }
