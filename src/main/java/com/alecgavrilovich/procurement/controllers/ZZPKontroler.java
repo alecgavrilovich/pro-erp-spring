@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.alecgavrilovich.procurement.dbb.ProizvodDBB;
 import com.alecgavrilovich.procurement.dbb.ZZPDBB;
+import com.alecgavrilovich.procurement.domain.Dobavljac;
 import com.alecgavrilovich.procurement.domain.Proizvod;
 import com.alecgavrilovich.procurement.domain.StavkaZZP;
 import com.alecgavrilovich.procurement.domain.Valuta;
@@ -38,6 +39,10 @@ public class ZZPKontroler {
 	
 	@RequestMapping("")
 	public String pronadjiSveZZP(Model model) {
+		
+		// Ocisti objekt ZZP
+		stavkeNovogZZP.clear();
+		zzp.setStavke(stavkeNovogZZP);
 		
 		model.addAttribute("listaZZP", zzpDBB.pronadjiSveZZP());
 		
@@ -76,27 +81,31 @@ public class ZZPKontroler {
 		
 		List<Proizvod> listaProizvoda = prDBB.pronadjiProizvode();
 		List<Valuta> listaValuta = zzpDBB.vratiValute();
+		List<Dobavljac> listaDobavljaca = zzpDBB.vratiDobavljace();
 		
 		zzp.setSifraZZP(sifraNovogZZP);
 		zzp.setDatum(datum);
+		zzp.setVrednostZZP(0);
 		
+		model.addAttribute("zzp", zzp);
 		model.addAttribute("sifraNovogZZP", sifraNovogZZP);
 		model.addAttribute("datumZZP", datum);
 		model.addAttribute("listaProizvoda", listaProizvoda);
 		model.addAttribute("listaValuta", listaValuta);
+		model.addAttribute("listaDobavljaca", listaDobavljaca);
 		
 		return "zzp/novi-zzp";
 		
 	}
 	
 	@RequestMapping(value="/sacuvajZZP", method = RequestMethod.POST)
-	public String sacuvajZZP(@RequestParam("sifraDob") Integer sifraDob) {
+	public String sacuvajZZP(@RequestParam("sifraDob") Integer sifraDob, @RequestParam("valutaZZP") String valuta, @RequestParam("vrednostZZP") double vrednostZZP) {
 		
 		zzp.setSifraDob(sifraDob);
-		
 		zzp.setImeDob("test");
-	
-		zzp.setVrednostZZP(100);
+		zzp.setVrednostZZP(vrednostZZP);
+		zzp.setValuta(valuta);
+		zzp.setStavke(stavkeNovogZZP);
 		
 		zzpDBB.sacuvajZZP(zzp);
 		
@@ -104,7 +113,6 @@ public class ZZPKontroler {
 		
 	}
 	
-
 	@RequestMapping(value="/dodajStavku", method = RequestMethod.POST)
 	public String dodajStavku(HttpServletRequest req, Model model) {
 		

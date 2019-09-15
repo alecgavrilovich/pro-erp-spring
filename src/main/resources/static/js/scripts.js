@@ -1,13 +1,12 @@
 
 		$("#dugmeZaNovuStavku").on("click", function() {
-
-			let sifraZZP2 = $("#sifraZZP").text();
 		
 			let sifraPrNoveStavke = $("#sifraPrNoveStavke").val();
 			let kolicinaNoveStavke = $("#kolicinaNoveStavke").val();
 			let cenaNoveStavke = $("#cenaNoveStavke").val();
 			let cenaZaKomNoveStavke = $("#cenaZaKomNoveStavke").val();
 			let valutaNovogZZP = $("#valutaZZP").val();
+			
 			
 //			let node = "<tr>" +
 //			"<td>" + sifraZZP2 + " </td>" +
@@ -23,6 +22,7 @@
 //			"</tr>";
 			
 			$.ajax({
+				
 				method: "POST",
 				url: "http://localhost:8090/zzp/dodajStavku",
 				data: {
@@ -35,6 +35,7 @@
 				success: function(response) {
 					
 					$("#stavkeZZP").append(response);
+					novaVrednostZZP(kolicinaNoveStavke, cenaNoveStavke, cenaZaKomNoveStavke)
 					
 				},
 				error: function() {
@@ -45,14 +46,38 @@
 
 			});
 			
+			ocistiPoljaNoveStavke();
+			
 		});
 
-	
+// Ocisti unete vrednosti za novu/izmenu stavke
+		
 $("#ocistiFormuZaStavku").on("click", function() {
-		
-	$(".polje-nove-stavke").val("");
-		
+			
+	ocistiPoljaNoveStavke()
+				
 });
+		
+function ocistiPoljaNoveStavke() {
+	
+	$(".polje-nove-stavke").val("");
+	
+}
+
+function novaVrednostZZP(kolicina, cena, cenaZaKom) {
+	
+	let staraVrednost = $("#vrednostZZP").val();
+	let vrednostStavke = 0;
+	let novaVrednost = 0;
+	
+	vrednostStavke = (cena/cenaZaKom) * kolicina;
+	
+	novaVrednost = Number(staraVrednost) + vrednostStavke;
+	
+	$("#vrednostZZP").val(novaVrednost);
+	
+}
+
 	
 	
 

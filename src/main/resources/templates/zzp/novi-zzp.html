@@ -5,7 +5,7 @@
 	<div th:insert="~{home :: nav}"></div>
 	<div class="container">
 		
-			<form method="post" th:action="@{/zzp/sacuvajZZP}">
+			<form method="post" th:action="@{/zzp/sacuvajZZP}" th:object="${zzp}">
 		
 				<div class="form-row">
 					<div class="form-group">
@@ -22,37 +22,37 @@
 				<div class="form-row">
 					<div class="col">
 						<label for="sifra_zzp" class="">Sifra ZZP: </label>
-						<p th:text="${sifraNovogZZP}" id="sifraZZP" class=".display-3"></p>
+						<input type="number" class="form-control" id="sifraZZP" name="sifraZZP" th:field="*{sifraZZP}" readonly>
 					</div>
 					
 					<div class="col">
-						<label for="datum_zzp" class="">Datum: </label>	
-						<p th:text="${datumZZP}" class=".display-3"></p>
+						<label for="zzp_sifraDob" class="">Sifra Dobavljaca: </label>
+						<select id="sifraDob" name="sifraDob" class="form-control">
+				         	<option selected>---</option>
+				         	<option th:each="dob : ${listaDobavljaca}" th:value="${dob.sifraDob}" th:text="${dob.sifraDob}"></option>
+				        </select>
+					</div>
+					<div class="col">
 					</div>
 					
-					<div class="col">
-						<label for="datum_zzp" class="">Vrednost: </label>
-						<input type="number" class="form-control" name="vrednostZZP" readonly>	
-					</div>
 					
 				</div>
 				
 				<div class="form-row">
 					<div class="col">
-						<label for="zzp_sifraDob" class="">Sifra Dobavljaca: </label>
-						<input type="number" class="form-control" name="sifraDob">	
+						<label for="datum_zzp" class="">Datum: </label>
+						<input type="date" class="form-control" id="datumZZP" name="datumZZP" th:field="*{datum}" readonly>
 					</div>
 					<div class="col">
-						<label for="imeDob" class="">Ime Dobavljaca: </label>
-						<p></p>	
+						<label for="datum_zzp" class="">Vrednost: </label>
+						<input type="number" class="form-control" id="vrednostZZP" name="vrednostZZP" th:field="*{vrednostZZP}" readonly>	
 					</div>
-					
 					<div class="col">
 						<label for="valutaZZP" class="">Valuta: </label>
-						<select id="valutaZZP" class="form-control polje-nove-stavke">
+						<select id="valutaZZP" name="valutaZZP" class="form-control">
 				         	<option selected>---</option>
 				         	<option th:each="val : ${listaValuta}" th:value="${val.id}" th:text="${val.id}"></option>
-				         </select>
+				        </select>
 					</div>
 				</div>
 			</form>
@@ -74,10 +74,10 @@
 				    	<label >Kolicina:</label>	 
 				      	<input id="kolicinaNoveStavke" type="number" class="form-control polje-nove-stavke" placeholder="">
 				    </div>
-				    <div class="col">
-				    	<label >Jedinica Mere:</label>	 
-				      	<input id="jmNoveStavke" type="text" class="form-control polje-nove-stavke" placeholder="">
-				    </div>
+<!-- 				    <div class="col"> -->
+<!-- 				    	<label >Jedinica Mere:</label>	  -->
+<!-- 				      	<input id="jmNoveStavke" type="text" class="form-control polje-nove-stavke" placeholder=""> -->
+<!-- 				    </div> -->
 				    <div class="col">
 				    	<label >Cena:</label>	 
 				      	<input id="cenaNoveStavke" type="text" class="form-control polje-nove-stavke" placeholder="">
@@ -97,14 +97,14 @@
 			</div>
 			
 			
-			<table class="table table-striped">
+			<table class="table">
 				<thead>
 					<tr>
 						<th>Sifra ZZP</th>
 						<th>Redni Broj</th>
 						<th>Status</th>
 						<th>Sifra Proizvoda</th>
-						<th>Opis Proizvoda</th>
+<!-- 						<th>Opis Proizvoda</th> -->
 						<th>Kolicina</th>
 						<th>Cena</th>
 						<th>Cena za Kom</th>

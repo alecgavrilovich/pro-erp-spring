@@ -1,21 +1,31 @@
 package com.alecgavrilovich.procurement.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="DOBAVLJAC")
 public class Dobavljac {
 	
+	@Id
+	@Column(name="SIFRADOB")
 	private Integer sifraDob;
-	private String opisDob;
+	@Column(name="IMEDOB")
+	private String imeDob;
 	
-	public Integer vratiSifraDob() {
+	public Integer getSifraDob() {
 		return sifraDob;
 	}
-	public void postaviSifraDob(Integer sifraDob) {
+	public void setSifraDob(Integer sifraDob) {
 		this.sifraDob = sifraDob;
 	}
-	public String vratiOpisDob() {
-		return opisDob;
+	public String getOpisDob() {
+		return imeDob;
 	}
-	public void postaviOpisDob(String opisDob) {
-		this.opisDob = opisDob;
+	public void setOpisDob(String opisDob) {
+		this.imeDob = opisDob;
 	}
 
 }

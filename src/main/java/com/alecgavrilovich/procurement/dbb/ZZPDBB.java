@@ -6,30 +6,38 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.alecgavrilovich.procurement.domain.Dobavljac;
 import com.alecgavrilovich.procurement.domain.StavkaZZP;
 import com.alecgavrilovich.procurement.domain.Valuta;
 import com.alecgavrilovich.procurement.domain.ZZP;
+import com.alecgavrilovich.procurement.repositories.IDobavljacRepo;
 import com.alecgavrilovich.procurement.repositories.IStavkaZZPRepo;
 import com.alecgavrilovich.procurement.repositories.IValutaRepo;
 import com.alecgavrilovich.procurement.repositories.IZZPRepo;
 
 @Component
+@Transactional
 public class ZZPDBB {
 	
 	private IZZPRepo zzpRepo;
 	private IStavkaZZPRepo stZZPRepo;
 	private IValutaRepo valutaRepo;
+	private IDobavljacRepo dobavljacRepo;
 	Connection con = null;
 	
 	@Autowired
-	public ZZPDBB (IZZPRepo zzpRepo, IStavkaZZPRepo stZZPRepo, IValutaRepo valutaRepo) {
+	public ZZPDBB (IZZPRepo zzpRepo, IStavkaZZPRepo stZZPRepo, IValutaRepo valutaRepo, IDobavljacRepo dobavljacRepo) {
 		
 		this.zzpRepo = zzpRepo;
 		this.stZZPRepo = stZZPRepo;
 		this.valutaRepo = valutaRepo;
+		this.dobavljacRepo = dobavljacRepo;
 	}
 	
 	
@@ -162,6 +170,12 @@ public class ZZPDBB {
 		
 		zzpRepo.save(zzp);
 		
+		zzp.getStavke().forEach((st) -> {
+			
+			stZZPRepo.save(st);
+			
+		});
+		
 	}
 	
 	
@@ -179,6 +193,16 @@ public class ZZPDBB {
 		
 		return listaValuta;
 		
+	}
+
+
+	public List<Dobavljac> vratiDobavljace() {
+		
+		List<Dobavljac> listaDobavljaca = new ArrayList<>();
+		
+		dobavljacRepo.findAll().forEach(listaDobavljaca::add);
+		
+		return listaDobavljaca;
 	}
 
 }

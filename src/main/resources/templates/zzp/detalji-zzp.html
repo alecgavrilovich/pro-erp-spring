@@ -5,35 +5,50 @@
 	<div th:insert="~{home :: nav}"></div>
 	<div class="container">
 		
-		<a class="btn btn-primary mb-4" href="/zzp" role="button">Nazad</a>
-		<div class="row">
-			<div class="col-sm-6">
-				<h5>Zahtev za ponudu</h5>
-				<h2 th:text="'No.' + ${zzp.sifraZZP}"></h2>
-			</div>
-		</div>
-		<form>
-			<div class="form-row">
-				<div class="form-group col-sm-10">
-					<label for="zzp_datum" class="col-sm-2 col-form-label">Datum: </label>
-					<p class="form-control-plaintext" id="zzp_datum" th:text="${zzp.datum}"></p>
+		<a class="btn btn-primary mb-4" href="/zzp" role="button">Nazad</a>		
+		
+		<form th:object="${zzp}">
+				<div class="form-row">
+					<div class="form-group col-sm-6">
+						<h3>Zahtev za Ponudu</h3>
+					</div>
 				</div>
-				<div class="form-group">
-					<label for="zzp_vrednost"class="col-sm-2 col-form-label">Vrednost ZZP: </label>
-					<p class="form-control-plaintext" id="zzp_vrednost" th:text="${zzp.vrednostZZP}"></p>
+				
+				<div class="form-row">
+					<div class="col">
+						<label for="sifra_zzp" class="">Sifra ZZP: </label>
+						<input type="number" class="form-control" id="sifraZZP" name="sifraZZP" th:field="*{sifraZZP}" readonly>
+					</div>
+					
+					<div class="col">
+						<label for="zzp_sifraDob" class="">Sifra Dobavljaca: </label>
+						<input type="number" class="form-control" id="sifraDob" th:field="*{sifraDob}" readonly>
+					</div>
+					
+					<div class="col">
+						<label for="zzp_imeDob" class="">Ime Dobavljaca: </label>
+						<input type="text" class="form-control" id="imeDob" th:field="*{imeDob}" readonly>
+					</div>
+					
 				</div>
-			</div>
-			<div class="form-row">
-				<div class="form-group col-sm-10">
-					<label for="zzp_sifraDob" class="col-sm-2 col-form-label">Sifra Dobavljaca: </label>
-					<p class="form-control-plaintext" id="zzp_sifraDob" th:text="${zzp.sifraDob}"></p>
+				<div class="form-row">
+					<div class="col">
+						<label for="datum_zzp" class="">Datum: </label>
+						<input type="date" class="form-control" id="datumZZP" name="datumZZP" th:field="*{datum}" readonly>
+					</div>
+					<div class="col">
+						<label for="datum_zzp" class="">Vrednost: </label>
+						<input type="number" class="form-control" id="vrednostZZP" name="vrednostZZP" th:field="*{vrednostZZP}" readonly>	
+					</div>
+					
+					<div class="col">
+						<label for="valutaZZP" class="">Valuta: </label>
+						<input type="text" class="form-control" id="valutaZZp" th:field="*{valuta}" readonly>
+					</div>
 				</div>
-				<div class="form-group">
-					<label for="zzp_valuta"class="col-sm-2 col-form-label">Valuta: </label>
-					<p class="form-control-plaintext" id="zzp_valuta" th:text="${zzp.valuta}"></p>
-				</div>
-			</div>
 		</form>
+		
+		<br>
 		
 		<h3>Stavke</h3>
 		
@@ -63,17 +78,6 @@
 					<td th:text="${st.valutaId}"></td>
 				</tr>
 			</table>
-		
-		<div th:fragment="scripts">
-			<script type="text/javascript"
-				src="/webjars/jquery/3.0.0/jquery.min.js"></script>
-			<script type="text/javascript"
-				src="/webjars/popper.js/1.11.1/dist/popper.min.js"></script>
-			<script type="text/javascript"
-				src="/webjars/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
-			<script type="text/javascript"
-				th:src="@{/js/scripts.js}"></script>
-		</div>
 	</div>
 	<div th:replace="~{home :: scripts}"></div>
 	<footer th:replace="~{home :: footer}"></footer>
