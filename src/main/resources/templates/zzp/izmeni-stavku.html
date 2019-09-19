@@ -1,0 +1,13 @@
+<tr th:id="${stavkaZaIzmenu.redniBr}">
+    <td th:text="${stavkaZaIzmenu.sifraZZP}"></td>
+    <td th:text="${stavkaZaIzmenu.redniBr}"></td>
+    <td th:text="${stavkaZaIzmenu.status}" th:id="status_ + ${stavkaZaIzmenu.redniBr}"></td>
+    <td th:text="${stavkaZaIzmenu.sifraPr}" th:id="sifraPr_ + ${stavkaZaIzmenu.redniBr}"></td>
+    <td th:text="${stavkaZaIzmenu.kolicina}" th:id="kolicina_ + ${stavkaZaIzmenu.redniBr}"></td>
+    <td th:text="${stavkaZaIzmenu.cena}" th:id="cena_ + ${stavkaZaIzmenu.redniBr}"></td>
+    <td th:text="${stavkaZaIzmenu.cenaZaKom}" th:id="cenaZaKom_ + ${stavkaZaIzmenu.redniBr}"></td>
+    <td th:text="${stavkaZaIzmenu.vrednost}"></td>
+    <td th:text="${stavkaZaIzmenu.valutaId}"></td>
+    <td class="dugmeZaIzmenu clickable-row" th:id="izmeni_ + ${stavkaZaIzmenu.redniBr}">Izmeni</td>
+	<td class="dugmeZaBrisanje clickable-row" th:id="obrisi_ + ${stavkaZaIzmenu.redniBr}">Obrisi</td>
+</tr>

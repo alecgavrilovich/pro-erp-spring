@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{home :: header}"></head>
+<body>
+	<div th:insert="~{home :: nav}"></div>
+	<div class="container">
+		
+		<form method="post" th:action="@{/zzp/sacuvajIzmeneZZP}" th:object="${zzp}">
+		
+				<div class="form-row">
+					<div class="form-group">
+						<button type="submit" class="btn btn-success">Sacuvaj Izmene</button>
+						<a th:href="@{/zzp}" class="btn btn-danger">Prekini</a>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-sm-6">
+						<h3>Izmeni - Zahtev za Ponudu</h3>
+					</div>
+				</div>
+				
+				<div class="form-row">
+					<div class="col">
+						<label for="sifra_zzp" class="">Sifra ZZP: </label>
+						<input type="number" class="form-control" id="sifraZZP" name="sifraZZP" th:field="*{sifraZZP}" readonly>
+					</div>
+					
+					<div class="col">
+						<label for="zzp_sifraDob" class="">Sifra Dobavljaca: </label>
+						<select id="sifraDob" name="sifraDob" class="form-control">
+				         	<option selected value="${zzp.sifraDob}" th:text="${zzp.sifraDob}"></option>
+				         	<option th:each="dob : ${listaDobavljaca}" th:value="${dob.sifraDob}" th:text="${dob.sifraDob}"></option>
+				        </select>
+					</div>
+					<div class="col">
+					</div>
+					
+					
+				</div>
+				
+				<div class="form-row">
+					<div class="col">
+						<label for="datum_zzp" class="">Datum: </label>
+						<input type="date" class="form-control" id="datumZZP" name="datumZZP" th:field="*{datum}" readonly>
+					</div>
+					<div class="col">
+						<label for="datum_zzp" class="">Vrednost: </label>
+						<input type="number" class="form-control" id="vrednostZZP" name="vrednostZZP" th:field="*{vrednostZZP}" readonly>	
+					</div>
+					<div class="col">
+						<label for="valutaZZP" class="">Valuta: </label>
+						<select id="valutaZZP" name="valutaZZP" class="form-control">
+				         	<option selected th:value="${zzp.valuta}" th:text="${zzp.valuta}"></option>
+				         	<option th:each="val : ${listaValuta}" th:value="${val.id}" th:text="${val.id}"></option>
+				        </select>
+					</div>
+				</div>
+			</form>
+			
+			<br>
+		
+			<h3>Stavke</h3>
+			
+			<div class="form-group" >
+				<div class="form-row" id="novaStavka">
+					<div class="col">
+				         <label >Sfira Pr:</label>
+				         <select id="sifraPrNoveStavke" class="form-control polje-nove-stavke">
+				         	<option selected>---</option>
+				         	<option th:each="pr : ${listaProizvoda}" th:value="${pr.id}" th:text="${pr.id}"></option>
+				         </select>				         	    
+				    </div>
+				    <div class="col">
+				    	<label >Kolicina:</label>	 
+				      	<input id="kolicinaNoveStavke" type="number" class="form-control polje-nove-stavke" placeholder="">
+				    </div>
+<!-- 				    <div class="col"> -->
+<!-- 				    	<label >Jedinica Mere:</label>	  -->
+<!-- 				      	<input id="jmNoveStavke" type="text" class="form-control polje-nove-stavke" placeholder=""> -->
+<!-- 				    </div> -->
+				    <div class="col">
+				    	<label >Cena:</label>	 
+				      	<input id="cenaNoveStavke" type="text" class="form-control polje-nove-stavke" placeholder="">
+				    </div>
+				    <div class="col">
+				    	<label >CenaZaKom:</label>	 
+				      	<input id="cenaZaKomNoveStavke" type="text" class="form-control polje-nove-stavke" placeholder="">
+				    </div>
+				    <div class="col" hidden="hidden">
+				    	<label >Redni br:</label>	 
+				      	<input id="redniBrStZaIzmenu" type="number" class="form-control polje-nove-stavke" placeholder="">
+				    </div>
+	  			</div>
+			</div>
+			
+			<div class="form-row">
+				<div class="form-group" id="test8">
+					<button class="btn btn-success button-save-edit" id="dugmeZaIzmenuStavke">Dodaj</button>
+					<button class="btn btn-danger ocisti-polja" id="ocistiFormuZaStavku">Ocisti polja</button>
+	  			</div>
+			</div>
+			
+			
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Sifra ZZP</th>
+						<th>Redni Broj</th>
+						<th>Status</th>
+						<th>Sifra Proizvoda</th>
+						<th>Kolicina</th>
+						<th>Cena</th>
+						<th>Cena za Kom</th>
+						<th>Vrednost</th>
+						<th>Valuta</th>
+						<th>Izmeni</th>
+						<th>Obrisi</th>
+					</tr>
+				</thead>	
+				<tbody id="stavkeZZP">
+					<tr th:each="st : ${stavke}" th:id="${st.redniBr}">
+						<td th:text="${st.sifraZZP}"></td>
+						<td th:text="${st.redniBr}"></td>
+						<td th:text="${st.status}" th:id="status_ + ${st.redniBr}"></td>
+						<td th:text="${st.sifraPr}" th:id="sifraPr_ + ${st.redniBr}"></td>
+						<td th:text="${st.kolicina}" th:id="kolicina_ + ${st.redniBr}"></td>
+						<td th:text="${st.cena}" th:id="cena_ + ${st.redniBr}"></td>
+						<td th:text="${st.cenaZaKom}" th:id="cenaZaKom_ + ${st.redniBr}"></td>
+						<td th:text="${st.vrednost}"></td>
+						<td th:text="${st.valutaId}"></td>
+						<td class="dugmeZaIzmenu clickable-row" th:id="izmeni_ + ${st.redniBr}">Izmeni</td>
+						<td class="dugmeZaBrisanje clickable-row" th:id="obrisi_ + ${st.redniBr}">Obrisi</td>
+					</tr>
+				</tbody>
+				
+			</table>
+	</div>
+	<div th:replace="~{home :: scripts}"></div>
+	<footer th:replace="~{home :: footer}"></footer>
+</body>
+</html>

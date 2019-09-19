@@ -33,7 +33,7 @@ public class ZZPKontroler {
 	@Autowired
 	private ProizvodDBB prDBB;
 	private ZZP zzp = new ZZP();
-	private List<StavkaZZP> stavkeNovogZZP = new ArrayList<>();
+	private List<StavkaZZP> stavkeZZP = new ArrayList<>();
 	private int redniBroj = 0;
 	
 	
@@ -41,8 +41,9 @@ public class ZZPKontroler {
 	public String pronadjiSveZZP(Model model) {
 		
 		// Ocisti objekt ZZP
-		stavkeNovogZZP.clear();
-		zzp.setStavke(stavkeNovogZZP);
+		zzp = new ZZP();
+		stavkeZZP.clear();
+		// zzp.setStavke(stavkeZZP);
 		
 		model.addAttribute("listaZZP", zzpDBB.pronadjiSveZZP());
 		
@@ -105,7 +106,7 @@ public class ZZPKontroler {
 		zzp.setImeDob("test");
 		zzp.setVrednostZZP(vrednostZZP);
 		zzp.setValuta(valuta);
-		zzp.setStavke(stavkeNovogZZP);
+		zzp.setStavke(stavkeZZP);
 		
 		zzpDBB.sacuvajZZP(zzp);
 		
@@ -116,7 +117,7 @@ public class ZZPKontroler {
 	@RequestMapping(value="/dodajStavku", method = RequestMethod.POST)
 	public String dodajStavku(HttpServletRequest req, Model model) {
 		
-		StavkaZZP novaStavka = new StavkaZZP();
+		StavkaZZP st = new StavkaZZP();
 		double vrednostNoveStavke;
 		double cenaPoKomadu;
 		
@@ -138,24 +139,118 @@ public class ZZPKontroler {
 		double konacnaVrednostStavke = bd.doubleValue();
 		
 		// Popuni objekt nova StavkaZZP
-		novaStavka.setSifraZZP(zzp.getSifraZZP());
-		novaStavka.setRedniBr(redniBroj);
-		novaStavka.setStatus(1);
-		novaStavka.setSifraPr(sifraPr);
-		novaStavka.setOpisPr("test");
-		novaStavka.setKolicina(kolicina);
-		novaStavka.setCena(cena);
-		novaStavka.setCenaZaKom(cenaZaKom);
-		novaStavka.setVrednost(konacnaVrednostStavke);
-		novaStavka.setValutaId(valuta);
+		st.setSifraZZP(zzp.getSifraZZP());
+		st.setRedniBr(redniBroj);
+		st.setStatus(1);
+		st.setSifraPr(sifraPr);
+		st.setOpisPr("test");
+		st.setKolicina(kolicina);
+		st.setCena(cena);
+		st.setCenaZaKom(cenaZaKom);
+		st.setVrednost(konacnaVrednostStavke);
+		st.setValutaId(valuta);
 		
 		// Dodja u kolekciju stavki novog ZZP
-		stavkeNovogZZP.add(novaStavka);
+		stavkeZZP.add(st);
 		
-		model.addAttribute("novaStavka", novaStavka);
+		model.addAttribute("st", st);
 		
 		return "zzp/nova-stavka";
 		
 	}
+	
+	
+	// Izmena
+	
+	@RequestMapping(value="/izmeniZZP/{sifraZZP}")
+	public String izmeniZZP(@PathVariable("sifraZZP") Integer sifraZZP, Model model) {
+		
+		ZZP zzpZaIzmenu = zzpDBB.pronadjiZZP(sifraZZP);
+		
+		zzp.setSifraZZP(zzpZaIzmenu.getSifraZZP());
+		zzp.setDatum(zzpZaIzmenu.getDatum());
+		zzp.setSifraDob(zzpZaIzmenu.getSifraDob());
+		zzp.setImeDob(zzpZaIzmenu.getImeDob());
+		zzp.setValuta(zzpZaIzmenu.getValuta());
+		zzp.setVrednostZZP(zzpZaIzmenu.getVrednostZZP());
+		
+		zzpZaIzmenu.getStavke().forEach(stavkeZZP::add);
+		
+		List<Proizvod> listaProizvoda = prDBB.pronadjiProizvode();
+		List<Valuta> listaValuta = zzpDBB.vratiValute();
+		List<Dobavljac> listaDobavljaca = zzpDBB.vratiDobavljace();
+		
+		// List<StavkaZZP> stavke = zzpZaIzmenu.getStavke();
+		
+		model.addAttribute("zzp", zzpZaIzmenu);
+		model.addAttribute("stavke", zzpZaIzmenu.getStavke());
+		model.addAttribute("listaProizvoda", listaProizvoda);
+		model.addAttribute("listaValuta", listaValuta);
+		model.addAttribute("listaDobavljaca", listaDobavljaca);
+		
+		return "zzp/izmeni-zzp";
+		
+	}
+	
+	
+	@RequestMapping(value="/izmeniStavku", method = RequestMethod.POST)
+	public String izmeniStavku(HttpServletRequest req, Model model) {
+		
+		StavkaZZP stavkaZaIzmenu = new StavkaZZP();
+		double vrednostStavke;
+		double cenaPoKomadu;
+		
+		int sifraPr = Integer.valueOf(req.getParameter("sifraPr"));
+		int kolicina = Integer.valueOf(req.getParameter("kolicina"));
+		int cena = Integer.valueOf(req.getParameter("cena"));
+		int cenaZaKom = Integer.valueOf(req.getParameter("cenaZaKom"));
+		String valuta = req.getParameter("valuta");
+		int redniBr = Integer.valueOf(req.getParameter("redniBr"));
+		
+		
+		cenaPoKomadu =  (double) cena / (double) cenaZaKom;
+		
+		vrednostStavke = kolicina * cenaPoKomadu;
+		
+		BigDecimal bd = new BigDecimal(vrednostStavke).setScale(2, RoundingMode.HALF_UP);
+		
+		double konacnaVrednostStavke = bd.doubleValue();
+		
+		stavkeZZP.forEach((st) -> {
+			
+			if (st.getRedniBr() == redniBr) {
+				st.setStatus(2);
+				st.setSifraPr(sifraPr);
+				st.setOpisPr("test");
+				st.setKolicina(kolicina);
+				st.setCena(cena);
+				st.setCenaZaKom(cenaZaKom);
+				st.setVrednost(konacnaVrednostStavke);
+				st.setValutaId(valuta);
+			}
+			
+		});
+		
+		
+		// Popuni objekt StavkaZZP
+		stavkaZaIzmenu.setSifraZZP(zzp.getSifraZZP());
+		stavkaZaIzmenu.setRedniBr(redniBr);
+		stavkaZaIzmenu.setStatus(2);
+		stavkaZaIzmenu.setSifraPr(sifraPr);
+		stavkaZaIzmenu.setOpisPr("test");
+		stavkaZaIzmenu.setKolicina(kolicina);
+		stavkaZaIzmenu.setCena(cena);
+		stavkaZaIzmenu.setCenaZaKom(cenaZaKom);
+		stavkaZaIzmenu.setVrednost(konacnaVrednostStavke);
+		stavkaZaIzmenu.setValutaId(valuta);
+		
+		// Dodja u kolekciju stavki novog ZZP
+		
+		model.addAttribute("stavkaZaIzmenu", stavkaZaIzmenu);
+		
+		return "zzp/izmeni-stavku";
+	}
+	
+	
 	
 }
