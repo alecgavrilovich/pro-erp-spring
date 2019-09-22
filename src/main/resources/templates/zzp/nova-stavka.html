@@ -1,11 +1,13 @@
-<tr>
+<tr th:id="${novaStavka.redniBr}">
     <td th:text="${novaStavka.sifraZZP}"></td>
     <td th:text="${novaStavka.redniBr}"></td>
-    <td th:text="${novaStavka.status}"></td>
-    <td th:text="${novaStavka.sifraPr}"></td>
-    <td th:text="${novaStavka.kolicina}"></td>
-    <td th:text="${novaStavka.cena}"></td>
-    <td th:text="${novaStavka.cenaZaKom}"></td>
-    <td th:text="${novaStavka.vrednost}"></td>
+    <td th:text="${novaStavka.status}" th:id="status_ + ${novaStavka.redniBr}"></td>
+    <td th:text="${novaStavka.sifraPr}" th:id="sifraPr_ + ${novaStavka.redniBr}"></td>
+    <td th:text="${novaStavka.kolicina}" th:id="kolicina_ + ${novaStavka.redniBr}"></td>
+    <td th:text="${novaStavka.cena}" th:id="cena_ + ${novaStavka.redniBr}"></td>
+    <td th:text="${novaStavka.cenaZaKom}" th:id="cenaZaKom_ + ${novaStavka.redniBr}"></td>
+    <td th:text="${novaStavka.vrednost}" th:id="vrednost_ + ${novaStavka.redniBr}"></td>
     <td th:text="${novaStavka.valutaId}"></td>
+<!--     <td class="dugmeZaIzmenu clickable-row" th:id="izmeni_ + ${novaStavka.redniBr}">Izmeni</td> -->
+<!-- 	<td class="dugmeZaBrisanje clickable-row" th:id="obrisi_ + ${novaStavka.redniBr}">Obrisi</td> -->
 </tr>

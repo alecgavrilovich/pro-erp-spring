@@ -34,7 +34,7 @@ public class ZZPKontroler {
 	private ProizvodDBB prDBB;
 	private ZZP zzp = new ZZP();
 	private List<StavkaZZP> stavkeZZP = new ArrayList<>();
-	private int redniBroj = 0;
+	private int redniBroj;
 	
 	
 	@RequestMapping("")
@@ -128,8 +128,16 @@ public class ZZPKontroler {
 		String valuta = req.getParameter("valuta");
 		// Integer valutaId = Integer.valueOf(req.getParameter("valutaId"));
 		
-		redniBroj = redniBroj + 10;
-		
+		if (stavkeZZP.size() == 0) {
+			
+			redniBroj = 10;
+			
+		} else {
+			
+			redniBroj = (stavkeZZP.get(stavkeZZP.size() - 1).getRedniBr()) + 10;
+			
+		}
+			
 		cenaPoKomadu =  (double) cena / (double) cenaZaKom;
 		
 		vrednostNoveStavke = kolicina * cenaPoKomadu;
@@ -141,7 +149,7 @@ public class ZZPKontroler {
 		// Popuni objekt nova StavkaZZP
 		st.setSifraZZP(zzp.getSifraZZP());
 		st.setRedniBr(redniBroj);
-		st.setStatus(1);
+		st.setStatus(0);
 		st.setSifraPr(sifraPr);
 		st.setOpisPr("test");
 		st.setKolicina(kolicina);
@@ -153,7 +161,7 @@ public class ZZPKontroler {
 		// Dodja u kolekciju stavki novog ZZP
 		stavkeZZP.add(st);
 		
-		model.addAttribute("st", st);
+		model.addAttribute("novaStavka", st);
 		
 		return "zzp/nova-stavka";
 		
@@ -166,6 +174,8 @@ public class ZZPKontroler {
 	public String izmeniZZP(@PathVariable("sifraZZP") Integer sifraZZP, Model model) {
 		
 		ZZP zzpZaIzmenu = zzpDBB.pronadjiZZP(sifraZZP);
+		
+		
 		
 		zzp.setSifraZZP(zzpZaIzmenu.getSifraZZP());
 		zzp.setDatum(zzpZaIzmenu.getDatum());
@@ -195,8 +205,7 @@ public class ZZPKontroler {
 	
 	@RequestMapping(value="/izmeniStavku", method = RequestMethod.POST)
 	public String izmeniStavku(HttpServletRequest req, Model model) {
-		
-		StavkaZZP stavkaZaIzmenu = new StavkaZZP();
+	
 		double vrednostStavke;
 		double cenaPoKomadu;
 		
@@ -221,7 +230,7 @@ public class ZZPKontroler {
 			if (st.getRedniBr() == redniBr) {
 				st.setStatus(2);
 				st.setSifraPr(sifraPr);
-				st.setOpisPr("test");
+				st.setOpisPr("dummy");
 				st.setKolicina(kolicina);
 				st.setCena(cena);
 				st.setCenaZaKom(cenaZaKom);
@@ -232,23 +241,61 @@ public class ZZPKontroler {
 		});
 		
 		
-		// Popuni objekt StavkaZZP
-		stavkaZaIzmenu.setSifraZZP(zzp.getSifraZZP());
-		stavkaZaIzmenu.setRedniBr(redniBr);
-		stavkaZaIzmenu.setStatus(2);
-		stavkaZaIzmenu.setSifraPr(sifraPr);
-		stavkaZaIzmenu.setOpisPr("test");
-		stavkaZaIzmenu.setKolicina(kolicina);
-		stavkaZaIzmenu.setCena(cena);
-		stavkaZaIzmenu.setCenaZaKom(cenaZaKom);
-		stavkaZaIzmenu.setVrednost(konacnaVrednostStavke);
-		stavkaZaIzmenu.setValutaId(valuta);
+//		// Popuni objekt StavkaZZP
+//		stavkaZaIzmenu.setSifraZZP(zzp.getSifraZZP());
+//		stavkaZaIzmenu.setRedniBr(redniBr);
+//		stavkaZaIzmenu.setStatus(2);
+//		stavkaZaIzmenu.setSifraPr(sifraPr);
+//		stavkaZaIzmenu.setOpisPr("test");
+//		stavkaZaIzmenu.setKolicina(kolicina);
+//		stavkaZaIzmenu.setCena(cena);
+//		stavkaZaIzmenu.setCenaZaKom(cenaZaKom);
+//		stavkaZaIzmenu.setVrednost(konacnaVrednostStavke);
+//		stavkaZaIzmenu.setValutaId(valuta);
 		
 		// Dodja u kolekciju stavki novog ZZP
 		
-		model.addAttribute("stavkaZaIzmenu", stavkaZaIzmenu);
+		//model.addAttribute("stavkaZaIzmenu", stavkaZaIzmenu);
 		
-		return "zzp/izmeni-stavku";
+		return "dummy";
+	}
+	
+	
+
+	@RequestMapping(value="/sacuvajIzmene", method = RequestMethod.POST)
+	public String sacuvajIzmene(HttpServletRequest req) {
+		
+		int sifraDob = Integer.valueOf(req.getParameter("sifraDob"));
+		int vrednostZZP = Integer.valueOf(req.getParameter("vrednostZZP"));
+		String valuta = req.getParameter("valutaZZP");
+		
+		zzp.setSifraDob(sifraDob);
+		zzp.setImeDob("test");
+		zzp.setVrednostZZP(vrednostZZP);
+		zzp.setValuta(valuta);
+		zzp.setStavke(stavkeZZP);
+		
+		zzpDBB.sacuvajIzmene(zzp);
+		
+		return "redirect:/zzp";
+		
+	}
+	
+	
+	@RequestMapping(value="/obrisiStavku", method = RequestMethod.POST)
+	public String obrisiStavku(HttpServletRequest req) {
+		
+		int redniBrStavke = Integer.valueOf(req.getParameter("redniBrStavke"));
+		
+		stavkeZZP.forEach((st) -> {
+			
+			if (st.getRedniBr() == redniBrStavke) {
+				st.setStatus(3);
+			
+			}
+		});
+		
+		return "dummy";
 	}
 	
 	

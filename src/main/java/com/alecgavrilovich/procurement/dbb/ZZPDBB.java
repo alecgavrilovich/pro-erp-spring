@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import com.alecgavrilovich.procurement.domain.Dobavljac;
 import com.alecgavrilovich.procurement.domain.StavkaZZP;
+import com.alecgavrilovich.procurement.domain.StavkaZZPId;
 import com.alecgavrilovich.procurement.domain.Valuta;
 import com.alecgavrilovich.procurement.domain.ZZP;
 import com.alecgavrilovich.procurement.repositories.IDobavljacRepo;
@@ -173,6 +174,47 @@ public class ZZPDBB {
 		zzp.getStavke().forEach((st) -> {
 			
 			stZZPRepo.save(st);
+			
+		});
+		
+	}
+	
+	public void sacuvajIzmene(ZZP zzp) {
+		
+		List<StavkaZZP> stavkeZZP = zzp.getStavke();
+		
+		zzpRepo.save(zzp);
+		
+		stavkeZZP.forEach((st) -> {
+			
+			int status = st.getStatus();
+			
+			StavkaZZPId stZZPId = new StavkaZZPId();
+			
+			stZZPId.setSifraZZP(st.getSifraZZP());
+			stZZPId.setRedniBr(st.getRedniBr());
+			
+			switch (status) {
+			
+				case 0:
+					stZZPRepo.save(st);
+					break;
+				
+				case 1:
+					break;
+					
+				case 2:
+					stZZPRepo.save(st);
+					break;
+					
+				case 3:
+					stZZPRepo.delete(stZZPId);
+					break;
+					
+				default:
+					break;
+			
+			}
 			
 		});
 		

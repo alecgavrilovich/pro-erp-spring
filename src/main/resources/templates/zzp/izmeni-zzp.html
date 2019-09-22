@@ -5,7 +5,7 @@
 	<div th:insert="~{home :: nav}"></div>
 	<div class="container">
 		
-		<form method="post" th:action="@{/zzp/sacuvajIzmeneZZP}" th:object="${zzp}">
+		<form method="post" th:action="@{/zzp/sacuvajIzmene}" th:object="${zzp}">
 		
 				<div class="form-row">
 					<div class="form-group">
@@ -28,7 +28,7 @@
 					<div class="col">
 						<label for="zzp_sifraDob" class="">Sifra Dobavljaca: </label>
 						<select id="sifraDob" name="sifraDob" class="form-control">
-				         	<option selected value="${zzp.sifraDob}" th:text="${zzp.sifraDob}"></option>
+				         	<option selected th:value="${zzp.sifraDob}" th:text="${zzp.sifraDob}"></option>
 				         	<option th:each="dob : ${listaDobavljaca}" th:value="${dob.sifraDob}" th:text="${dob.sifraDob}"></option>
 				        </select>
 					</div>
@@ -95,7 +95,8 @@
 			
 			<div class="form-row">
 				<div class="form-group" id="test8">
-					<button class="btn btn-success button-save-edit" id="dugmeZaIzmenuStavke">Dodaj</button>
+					<button class="btn btn-success" id="dugmeZaNovuStavku">Dodaj</button>
+					<button class="btn btn-success button-save-edit" id="dugmeZaIzmenuStavke" hidden="hidden">Izmeni</button>
 					<button class="btn btn-danger ocisti-polja" id="ocistiFormuZaStavku">Ocisti polja</button>
 	  			</div>
 			</div>
@@ -126,7 +127,7 @@
 						<td th:text="${st.kolicina}" th:id="kolicina_ + ${st.redniBr}"></td>
 						<td th:text="${st.cena}" th:id="cena_ + ${st.redniBr}"></td>
 						<td th:text="${st.cenaZaKom}" th:id="cenaZaKom_ + ${st.redniBr}"></td>
-						<td th:text="${st.vrednost}"></td>
+						<td th:text="${st.vrednost}" th:id="vrednost_ + ${st.redniBr}"></td>
 						<td th:text="${st.valutaId}"></td>
 						<td class="dugmeZaIzmenu clickable-row" th:id="izmeni_ + ${st.redniBr}">Izmeni</td>
 						<td class="dugmeZaBrisanje clickable-row" th:id="obrisi_ + ${st.redniBr}">Obrisi</td>
