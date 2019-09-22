@@ -131,6 +131,8 @@ public class ZZPDBB {
 			
 			if ((int)st.getSifraZZP() == (int)sifraZZP) {
 				
+				// st.setStatus(1);
+				
 				stavkeTrazenogZZP.add(st);
 			}
 		});
@@ -173,6 +175,8 @@ public class ZZPDBB {
 		
 		zzp.getStavke().forEach((st) -> {
 			
+			st.setStatus(1);
+			
 			stZZPRepo.save(st);
 			
 		});
@@ -204,6 +208,7 @@ public class ZZPDBB {
 					break;
 					
 				case 2:
+					st.setStatus(1);
 					stZZPRepo.save(st);
 					break;
 					

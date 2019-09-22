@@ -4,12 +4,25 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.alecgavrilovich.procurement.domain.JM;
 import com.alecgavrilovich.procurement.domain.Proizvod;
+import com.alecgavrilovich.procurement.repositories.IJMRepo;
 
 @Component
 public class ProizvodDBB {
+	
+	private IJMRepo jmRepo;
+	
+	@Autowired
+	public void Proizvod(IJMRepo jmRepo) {
+		
+		this.jmRepo = jmRepo;
+		
+	}
+	
 	
 	Connection con = null;
 	
@@ -94,7 +107,7 @@ public class ProizvodDBB {
 				Proizvod pr = new Proizvod();
 				pr.setId(rs.getInt("id"));
 				pr.setOpisPr(rs.getString("opispr"));
-				pr.setJmId(rs.getInt("jmid"));
+				pr.setJmId(rs.getString("idjm"));
 				proizvodi.add(pr);
 				
 				// System.out.println(pr.getId());
@@ -104,7 +117,7 @@ public class ProizvodDBB {
 			closeConnection();
 			
 		} catch (Exception e){
-			System.out.println(e);
+			System.out.println(e + "lista proizvoda");
 		}
 		
 		return proizvodi;
@@ -126,7 +139,7 @@ public class ProizvodDBB {
 			if (rs.next()) {
 				pr.setId(rs.getInt(1));
 				pr.setOpisPr(rs.getString(2));
-				pr.setJmId(rs.getInt(3));
+				pr.setJmId(rs.getString(3));
 			}
 			
 			closeConnection();
@@ -152,7 +165,7 @@ public class ProizvodDBB {
 			
 			ps.setInt(1, pr.getId());
 			ps.setString(2, pr.getOpisPr());
-			ps.setInt(3, pr.getJmId());
+			ps.setString(3, pr.getJmId());
 			
 			ret = ps.executeQuery() != null;
 			
@@ -168,7 +181,7 @@ public class ProizvodDBB {
 		
 	}
 	
-	public boolean sacuvajIzmene(int id, String opisPr, int JmId) {
+	public boolean sacuvajIzmene(int id, String opisPr, String idJm) {
 		
 		
 		boolean ret = false;
@@ -176,11 +189,11 @@ public class ProizvodDBB {
 		try {
 			
 			openConnection();
-			PreparedStatement ps = con.prepareStatement("UPDATE Proizvod SET opispr = ?, jmid = ? WHERE id = ?");
+			PreparedStatement ps = con.prepareStatement("UPDATE Proizvod SET opispr = ?, idjm = ? WHERE id = ?");
 			
 			ps.setInt(3, id);
 			ps.setString(1, opisPr);
-			ps.setInt(2, JmId);
+			ps.setString(2, idJm);
 			
 			
 			ret = ps.executeQuery() != null;
@@ -215,4 +228,15 @@ public class ProizvodDBB {
 		return ret;
 		
 	}
+	
+	public List<JM> vratiListuJM() {
+		
+		List<JM> listaJM = new ArrayList<>();
+		
+		jmRepo.findAll().forEach(listaJM::add);
+		
+		return listaJM;
+		
+	}
+	
 }

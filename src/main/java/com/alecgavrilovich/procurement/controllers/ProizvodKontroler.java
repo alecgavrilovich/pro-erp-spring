@@ -41,20 +41,22 @@ public class ProizvodKontroler {
 	}
 	
 	@RequestMapping("/noviProizvod")
-	public String noviProizvod() {
+	public String noviProizvod(Model model) {
+		
+		model.addAttribute("listaJM", prDBB.vratiListuJM());
 		
 		return "proizvod/novi-proizvod";
 		
 	}
 	
 	@RequestMapping(value="/sacuvajProizvod", method = RequestMethod.POST)
-	public String sacuvajProizvod(@RequestParam("id") int id, @RequestParam("opisPr") String opisPr, @RequestParam("JmId") int JmId) {
+	public String sacuvajProizvod(@RequestParam("id") int id, @RequestParam("opisPr") String opisPr, @RequestParam("jmId") String jmId) {
 		
 		boolean ret = false;
 		
 		pr.setId(id);
 		pr.setOpisPr(opisPr);
-		pr.setJmId(JmId);
+		pr.setJmId(jmId);
 		
 		ret = prDBB.sacuvajProizvod(pr);
 		
@@ -80,6 +82,7 @@ public class ProizvodKontroler {
 		
 		Proizvod prZaIzmenu = prDBB.pronadjiPr(id);
 		
+		model.addAttribute("listaJM", prDBB.vratiListuJM());
 		model.addAttribute("prIzmena", prZaIzmenu);
 		
 		return "/proizvod/izmeni-proizvod";
@@ -87,11 +90,11 @@ public class ProizvodKontroler {
 	}
 	
 	@RequestMapping(value="/sacuvajIzmene", method = RequestMethod.POST)
-	public String sacuvajIzmene(@RequestParam("id") int id, @RequestParam("opisPr") String opisPr, @RequestParam("JmId") int JmId) {
+	public String sacuvajIzmene(@RequestParam("id") int id, @RequestParam("opisPr") String opisPr, @RequestParam("jmId") String jmId) {
 		
 		boolean ret = false;
 		
-		ret = prDBB.sacuvajIzmene(id, opisPr, JmId);
+		ret = prDBB.sacuvajIzmene(id, opisPr, jmId);
 		
 		if (ret) {
 			

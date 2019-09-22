@@ -4,7 +4,7 @@ public class Proizvod {
 	
 	private Integer Id;
 	private String OpisPr;
-	private Integer JmId;
+	private String jmId;
 	
 	public Integer getId() {
 		return Id;
@@ -18,11 +18,11 @@ public class Proizvod {
 	public void setOpisPr(String opisPr) {
 		OpisPr = opisPr;
 	}
-	public Integer getJmId() {
-		return JmId;
+	public String getJmId() {
+		return jmId;
 	}
-	public void setJmId(Integer jmId) {
-		JmId = jmId;
+	public void setJmId(String jmId) {
+		this.jmId = jmId;
 	}
 	
 	

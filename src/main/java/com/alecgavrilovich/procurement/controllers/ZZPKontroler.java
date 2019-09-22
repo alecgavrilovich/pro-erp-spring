@@ -266,7 +266,7 @@ public class ZZPKontroler {
 	public String sacuvajIzmene(HttpServletRequest req) {
 		
 		int sifraDob = Integer.valueOf(req.getParameter("sifraDob"));
-		int vrednostZZP = Integer.valueOf(req.getParameter("vrednostZZP"));
+		double vrednostZZP = Double.valueOf(req.getParameter("vrednostZZP"));
 		String valuta = req.getParameter("valutaZZP");
 		
 		zzp.setSifraDob(sifraDob);

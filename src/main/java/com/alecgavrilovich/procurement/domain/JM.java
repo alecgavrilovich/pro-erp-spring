@@ -1,23 +1,32 @@
 package com.alecgavrilovich.procurement.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="JM")
 public class JM {
 	
-	private Integer id;
+	@Id
+	private String id;
+	@Column(name="OPISJM")
 	private String opisJm;
 	
-	public Integer vratiId() {
+	public String getId() {
 		return id;
 	}
 	
-	public void postaviId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	
-	public String vratiOpisJm() {
+	public String getOpisJm() {
 		return opisJm;
 	}
 	
-	public void postaviOpisJm(String opisJm) {
+	public void setOpisJm(String opisJm) {
 		this.opisJm = opisJm;
 	}
 	

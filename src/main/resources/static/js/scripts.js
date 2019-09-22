@@ -79,6 +79,8 @@ function novaVrednostZZP(staraVredStavke, kolicina, cena, cenaZaKom, status, idV
 		
 		novaVrednostZZP = staraVrednostZZP + vrednostStavke;
 		
+		
+		
 		$(idVrednostStavke).text(vrednostStavke);
 		
 	} else if (status === 3) {
@@ -88,9 +90,12 @@ function novaVrednostZZP(staraVredStavke, kolicina, cena, cenaZaKom, status, idV
 	}
 	
 	
+	novaVrednostZZP = Math.round( ( novaVrednostZZP + Number.EPSILON ) * 100 ) / 100;
+	vrednostStavke = Math.round( ( vrednostStavke + Number.EPSILON ) * 100 ) / 100;
+	
 	$("#vrednostZZP").val(novaVrednostZZP);
-	
-	
+	$(idVrednostStavke).text(vrednostStavke);
+
 }
 
 	
@@ -217,6 +222,48 @@ $(document).on("click", ".dugmeZaBrisanje", function() {
 			console.log("error");
 					
 		}
+
+	});
+	
+});
+
+
+$(document).on("click", ".pronadji-pr", function(e) {
+	
+	e.preventDefault();
+	
+	let prId = $(this).attr("id");
+
+	$.ajax({
+		
+		method: "GET",
+		url: "http://localhost:8090/webService/vratiProizvod/" + prId,
+		data: {
+			prId: prId
+		},
+		success: function(response) {
+			
+			let prNode = '<div class="container">'+ 
+			
+			'<form><div class="form-row"><div class="form-group col-md-6"><label>Sifra proizvoda</label><p>'+ response.id +'</p></div></div>' +
+			'<div class="form-row"><div class="form-group col-md-6"><label>Opis proizvoda</label><p>'+ response.opisPr +'</p></div></div>' +
+			'<div class="form-row"><div class="form-group col-md-6"><label>Jedinica Mere</label><p>'+ response.jmId +'</p></div></div></form>' +
+			
+			'<a class="btn btn-success mb-2" href="/proizvod/lista" >Nazad</a>' +
+			
+			'</div>';
+			
+			$("#listaProizvoda").remove();
+			$(".container").append(prNode);
+			
+		},
+		error: function() {
+
+			console.log("error");
+					
+		}
+		
+		
 
 	});
 	
