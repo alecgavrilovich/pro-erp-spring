@@ -113,7 +113,6 @@
 						<th>Cena</th>
 						<th>Cena za Kom</th>
 						<th>Vrednost</th>
-						<th>Valuta</th>
 						<th>Izmeni</th>
 						<th>Obrisi</th>
 					</tr>
@@ -128,7 +127,6 @@
 						<td th:text="${st.cena}" th:id="cena_ + ${st.redniBr}"></td>
 						<td th:text="${st.cenaZaKom}" th:id="cenaZaKom_ + ${st.redniBr}"></td>
 						<td th:text="${st.vrednost}" th:id="vrednost_ + ${st.redniBr}"></td>
-						<td th:text="${st.valutaId}"></td>
 						<td class="dugmeZaIzmenu clickable-row" th:id="izmeni_ + ${st.redniBr}">Izmeni</td>
 						<td class="dugmeZaBrisanje clickable-row" th:id="obrisi_ + ${st.redniBr}">Obrisi</td>
 					</tr>

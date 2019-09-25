@@ -1,9 +1,9 @@
 package com.alecgavrilovich.procurement.controllers;
 
-
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,8 +34,6 @@ public class ZZPKontroler {
 	private ProizvodDBB prDBB;
 	private ZZP zzp = new ZZP();
 	private List<StavkaZZP> stavkeZZP = new ArrayList<>();
-	private int redniBroj;
-	
 	
 	@RequestMapping("")
 	public String pronadjiSveZZP(Model model) {
@@ -120,13 +118,13 @@ public class ZZPKontroler {
 		StavkaZZP st = new StavkaZZP();
 		double vrednostNoveStavke;
 		double cenaPoKomadu;
+		int redniBroj;
 		
 		int sifraPr = Integer.valueOf(req.getParameter("sifraPr"));
 		int kolicina = Integer.valueOf(req.getParameter("kolicina"));
 		int cena = Integer.valueOf(req.getParameter("cena"));
 		int cenaZaKom = Integer.valueOf(req.getParameter("cenaZaKom"));
 		String valuta = req.getParameter("valuta");
-		// Integer valutaId = Integer.valueOf(req.getParameter("valutaId"));
 		
 		if (stavkeZZP.size() == 0) {
 			

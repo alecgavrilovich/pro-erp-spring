@@ -10,7 +10,7 @@
 		<form th:object="${zzp}">
 				<div class="form-row">
 					<div class="form-group col-sm-6">
-						<h3>Zahtev za Ponudu</h3>
+						<h3 th:text="'Zahtev za Ponudu - ' + ${zzp.sifraZZP}"></h3>
 					</div>
 				</div>
 				
@@ -56,7 +56,7 @@
 				<tr>
 					<th>Sifra ZZP</th>
 					<th>Redni Broj</th>
-					<th>Status</th>
+					<th hidden="hidden">Status</th>
 					<th>Sifra Proizvoda</th>
 					<th>Opis Proizvoda</th>
 					<th>Kolicina</th>
@@ -68,7 +68,7 @@
 				<tr th:each="st : ${stavke}">
 					<td th:text="${st.sifraZZP}"></td>
 					<td th:text="${st.redniBr}"></td>
-					<td th:text="${st.status}"></td>
+					<td th:text="${st.status}" hidden="hidden"></td>
 					<td th:text="${st.sifraPr}"></td>
 					<td th:text="${st.opisPr}"></td>
 					<td th:text="${st.kolicina}"></td>

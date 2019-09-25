@@ -201,6 +201,7 @@ public class ZZPDBB {
 			switch (status) {
 			
 				case 0:
+					st.setStatus(1);
 					stZZPRepo.save(st);
 					break;
 				

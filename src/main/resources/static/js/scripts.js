@@ -21,7 +21,7 @@ $("#dugmeZaNovuStavku").on("click", function() {
 		success: function(response) {
 					
 			$("#stavkeZZP").append(response);
-			novaVrednostZZP("dummy", kolicinaNoveStavke, cenaNoveStavke, cenaZaKomNoveStavke, 0, "dummy")
+			novaVrednostZZP("dummy", kolicinaNoveStavke, cenaNoveStavke, cenaZaKomNoveStavke, 0, "dummy");
 					
 		},
 		error: function() {
@@ -36,68 +36,13 @@ $("#dugmeZaNovuStavku").on("click", function() {
 			
 });
 
-// Ocisti unete vrednosti za novu/izmenu stavke
+
 		
 $("#ocistiFormuZaStavku").on("click", function() {
 			
 	ocistiPoljaNoveStavke()
 				
 });
-		
-function ocistiPoljaNoveStavke() {
-	
-	let statusFormeZaStavku =  $(".button-save-edit").text();
-	
-	$(".polje-nove-stavke").val("");
-	
-	
-	if (statusFormeZaStavku === "Izmeni") {
-		
-		$("#dugmeZaIzmenuStavke").attr("hidden", "hidden");
-		$("#dugmeZaNovuStavku").removeAttr("hidden");
-		
-	}
-	
-	
-}
-
-function novaVrednostZZP(staraVredStavke, kolicina, cena, cenaZaKom, status, idVrednostStavke) {
-	
-	let staraVrednostZZP = $("#vrednostZZP").val();
-	let vrednostStavke;
-	let novaVrednostZZP;
-	
-	vrednostStavke = (cena/cenaZaKom) * kolicina;
-	
-	if (status === 0) {
-		
-		novaVrednostZZP = Number(staraVrednostZZP) + vrednostStavke;
-		
-	} else if (status === 2) {
-		
-		staraVrednostZZP = Number(staraVrednostZZP) - Number(staraVredStavke);
-		
-		novaVrednostZZP = staraVrednostZZP + vrednostStavke;
-		
-		
-		
-		$(idVrednostStavke).text(vrednostStavke);
-		
-	} else if (status === 3) {
-		
-		novaVrednostZZP = staraVrednostZZP - staraVredStavke;
-		
-	}
-	
-	
-	novaVrednostZZP = Math.round( ( novaVrednostZZP + Number.EPSILON ) * 100 ) / 100;
-	vrednostStavke = Math.round( ( vrednostStavke + Number.EPSILON ) * 100 ) / 100;
-	
-	$("#vrednostZZP").val(novaVrednostZZP);
-	$(idVrednostStavke).text(vrednostStavke);
-
-}
-
 	
 $(document).on("click", ".dugmeZaIzmenu", function() {
 	
@@ -184,9 +129,6 @@ $("#dugmeZaIzmenuStavke").on("click", function() {
 		
 
 	});
-
-			
-	// ocistiPoljaNoveStavke();
 			
 });
 
@@ -269,6 +211,62 @@ $(document).on("click", ".pronadji-pr", function(e) {
 	
 });
 
+// ================================================================
+
+function ocistiPoljaNoveStavke() {
+	
+	let statusFormeZaStavku =  $(".button-save-edit").text();
+	
+	$(".polje-nove-stavke").val("");
+	
+	
+	if (statusFormeZaStavku === "Izmeni") {
+		
+		$("#dugmeZaIzmenuStavke").attr("hidden", "hidden");
+		$("#dugmeZaNovuStavku").removeAttr("hidden");
+		
+	}
+	
+	
+}
+
+function novaVrednostZZP(staraVredStavke, kolicina, cena, cenaZaKom, status, idVrednostStavke) {
+	
+	let staraVrednostZZP = $("#vrednostZZP").val();
+	let vrednostStavke;
+	let novaVrednostZZP;
+	
+	vrednostStavke = (cena/cenaZaKom) * kolicina;
+	
+	if (status === 0) {
+		
+		novaVrednostZZP = Number(staraVrednostZZP) + vrednostStavke;
+		
+	} else if (status === 2) {
+		
+		staraVrednostZZP = Number(staraVrednostZZP) - Number(staraVredStavke);
+		
+		novaVrednostZZP = staraVrednostZZP + vrednostStavke;
+		
+		
+		
+		$(idVrednostStavke).text(vrednostStavke);
+		
+	} else if (status === 3) {
+		
+		vrednostStavke = Number(staraVredStavke);
+		novaVrednostZZP = Number(staraVrednostZZP) - Number(staraVredStavke);
+		
+	}
+	
+	
+	novaVrednostZZP = Math.round( ( novaVrednostZZP + Number.EPSILON ) * 100 ) / 100;
+	vrednostStavke = Math.round( ( vrednostStavke + Number.EPSILON ) * 100 ) / 100;
+	
+	$("#vrednostZZP").val(novaVrednostZZP);
+	$(idVrednostStavke).text(vrednostStavke);
+
+}
 
 
 	

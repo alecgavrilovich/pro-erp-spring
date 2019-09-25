@@ -7,4 +7,7 @@
     <td th:text="${novaStavka.cena}" th:id="cena_ + ${novaStavka.redniBr}"></td>
     <td th:text="${novaStavka.cenaZaKom}" th:id="cenaZaKom_ + ${novaStavka.redniBr}"></td>
     <td th:text="${novaStavka.vrednost}" th:id="vrednost_ + ${novaStavka.redniBr}"></td>
+    <td th:text="${novaStavka.valutaId}"></td>
+    <td class="dugmeZaIzmenu clickable-row" th:id="izmeni_ + ${novaStavka.redniBr}">Izmeni</td>
+	<td class="dugmeZaBrisanje clickable-row" th:id="obrisi_ + ${novaStavka.redniBr}">Obrisi</td>
 </tr>
